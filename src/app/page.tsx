@@ -1,231 +1,405 @@
 'use client';
-import { useState } from 'react';
+import { useCartStore } from '@/store/cartStore';
+import HeaderActions from '@/components/HeaderActions';
+import { useState, useEffect } from 'react';
 
 export default function ProductPage() {
+  const getPlaceholder = (text: string) => `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800"><rect width="100%" height="100%" fill="%23f5f5f4"/><text x="50%" y="48%" dominant-baseline="middle" text-anchor="middle" fill="%23a8a29e" font-family="sans-serif" font-size="28" font-weight="300" letter-spacing="1">${encodeURIComponent(text)}</text><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="%23d6d3d1" font-family="sans-serif" font-size="18" font-weight="300">coming soon</text></svg>`;
+
+  const imageMap: Record<string, string[]> = {
+    'white': [
+      '/Web-Chomm-s-House/images/white-front.png',
+      '/Web-Chomm-s-House/images/white-left.png',
+      '/Web-Chomm-s-House/images/white-right.png',
+      '/Web-Chomm-s-House/images/white-top.png',
+      '/Web-Chomm-s-House/images/white-back.png',
+      '/Web-Chomm-s-House/images/white-bottom.png'
+    ],
+    'light-green': [
+      '/Web-Chomm-s-House/images/light-green-front-v2.png',
+      '/Web-Chomm-s-House/images/light-green-left-v2.png',
+      '/Web-Chomm-s-House/images/light-green-right-v2.png',
+      '/Web-Chomm-s-House/images/light-green-top-v2.png',
+      '/Web-Chomm-s-House/images/light-green-back-v2.png',
+      '/Web-Chomm-s-House/images/light-green-bottom-v2.png'
+    ],
+    'lime': [
+      getPlaceholder('Lime - Front'),
+      getPlaceholder('Lime - Left'),
+      getPlaceholder('Lime - Right'),
+      getPlaceholder('Lime - Top'),
+      getPlaceholder('Lime - Back'),
+      getPlaceholder('Lime - Bottom')
+    ],
+    'charcoal': [
+      '/Web-Chomm-s-House/images/charcoal-front-v2.jpg',
+      '/Web-Chomm-s-House/images/charcoal-left-v2.jpg',
+      '/Web-Chomm-s-House/images/charcoal-right-v2.jpg',
+      '/Web-Chomm-s-House/images/charcoal-top-v2.jpg',
+      '/Web-Chomm-s-House/images/charcoal-back-v2.jpg',
+      '/Web-Chomm-s-House/images/charcoal-bottom-v2.jpg'
+    ]
+  };
+
+  const getImagesForColor = (colorId: string) => {
+    return imageMap[colorId] || imageMap['white'];
+  };
+
   const [qty, setQty] = useState(1);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const [currentImages, setCurrentImages] = useState(getImagesForColor('white'));
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedColor, setSelectedColor] = useState('white');
+  const [selectedDecoration, setSelectedDecoration] = useState('ดอกไม้แห้ง');
+  const [selectedSize, setSelectedSize] = useState('30-35 กรัม');
+  const [selectedScent, setSelectedScent] = useState('Ice Mint');
+  const [selectedPackaging, setSelectedPackaging] = useState('กล่องลิ้นชัก');
+  const [addLogoSticker, setAddLogoSticker] = useState(true);
+
+  const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [slideDelay, setSlideDelay] = useState(3000);
+
+  useEffect(() => {
+    if (isLightboxOpen) return; 
+
+    const timer = setTimeout(() => {
+      setActiveIndex((current) => (current + 1) % currentImages.length);
+      setSlideDelay(3000);
+    }, slideDelay);
+    
+    return () => clearTimeout(timer);
+  }, [currentImages.length, activeIndex, slideDelay, isLightboxOpen]);
 
   const colors = [
-    { id: 'white', hex: '#FDFBF7' },
-    { id: 'light-green', hex: '#B5C49A' },
-    { id: 'lime', hex: '#C6D93C' },
-    { id: 'blue', hex: '#E2E8F0', tooltip: 'สีผงถ่าน' }
+    { id: 'white', hex: '#FDFBF7', label: 'White' },
+    { id: 'light-green', hex: '#D2DAC5', label: 'Light Green' },
+    { id: 'lime', hex: '#DCE495', label: 'Lime' },
+    { id: 'charcoal', hex: '#3F3F46', label: 'Charcoal' }
   ];
 
   const decorations = ['ดอกไม้แห้ง', 'โป๊ยกั๊ก', 'Bio-Bead', 'หินภูเขาไฟ', 'ดอกโสน'];
   const sizes = ['10-15 กรัม', '20-25 กรัม', '30-35 กรัม'];
   const scents = ['Premium Floral', 'Fresh Citrus', 'Ice Mint', 'Eucalyptus Bouquet', 'Coffee & Cream'];
 
+  const handleColorClick = (colorId: string) => {
+    setSelectedColor(colorId);
+    setActiveIndex(0);
+    setCurrentImages(getImagesForColor(colorId));
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      color: selectedColor,
+      size: selectedSize,
+      scent: selectedScent,
+      packaging: selectedPackaging,
+      addon: addLogoSticker,
+      price: basePrice,
+      quantity: qty,
+      image: currentImages[0]
+    });
+  };
+  const basePrice = 190;
+  const totalPrice = basePrice * qty;
+
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans pb-16">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
-        <div className="flex space-x-6 text-sm text-gray-600 font-medium">
-          <a href="#" className="hover:text-black">HOME</a>
-          <a href="#" className="hover:text-black">OUR STORY</a>
+    <div className="min-h-screen bg-white text-stone-900 font-sans pb-24 lg:pb-16 selection:bg-stone-200">
+      
+      {isOrderSummaryOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="p-6 pb-0 flex justify-between items-center">
+              <h3 className="text-xl font-medium text-stone-900">สรุปรายการสั่งซื้อ</h3>
+              <button onClick={() => setIsOrderSummaryOpen(false)} className="text-stone-400 hover:text-stone-600 bg-stone-100 hover:bg-stone-200 rounded-full p-2 transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              <div className="flex gap-5 items-center border-b border-stone-100 pb-6">
+                <div className="w-24 h-24 rounded-2xl overflow-hidden bg-stone-50 border border-stone-100 flex-shrink-0">
+                  <img 
+                    src={currentImages[0]} 
+                    className="w-full h-full object-cover mix-blend-multiply transition-all duration-700" 
+                    alt="Product" 
+                  />
+                </div>
+                <div>
+                  <h4 className="font-medium text-stone-900 text-lg">Aroma Wax Sachet</h4>
+                  <p className="text-sm text-stone-500 mt-1">จำนวน: {qty} ชิ้น</p>
+                  <p className="text-base font-semibold text-stone-900 mt-2">รวม {totalPrice} บาท</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-y-4 gap-x-4 text-sm">
+                <div className="text-stone-500">สี (Color)</div><div className="font-medium text-stone-900 capitalize">{selectedColor === 'charcoal' ? 'สีผงถ่าน (Charcoal)' : selectedColor}</div>
+                <div className="text-stone-500">ประดับ (Decor)</div><div className="font-medium text-stone-900">{selectedDecoration}</div>
+                <div className="text-stone-500">ขนาด (Size)</div><div className="font-medium text-stone-900">{selectedSize}</div>
+                <div className="text-stone-500">กลิ่น (Scent)</div><div className="font-medium text-stone-900">{selectedScent}</div>
+                <div className="text-stone-500">แพ็กเกจ (Package)</div><div className="font-medium text-stone-900">{selectedPackaging} {addLogoSticker && <span className="text-xs text-stone-400 block">+ สติกเกอร์โลโก้</span>}</div>
+              </div>
+
+              <button onClick={() => {
+                alert('ในอนาคตปุ่มนี้จะเปิดหน้าต่างแชท LINE Official พร้อมส่งข้อมูลการสั่งซื้อทั้งหมดไปให้แอดมินทันทีครับ!');
+                setIsOrderSummaryOpen(false);
+              }} className="w-full bg-[#00B900] hover:bg-[#00A000] text-white font-medium py-4 rounded-full flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-green-500/20 mt-4">
+                สั่งซื้อสินค้าผ่าน LINE
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-stone-100 px-5 md:px-10 py-4 flex items-center justify-between transition-all">
+        <button className="md:hidden p-2 -ml-2 text-stone-600" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+
+        <div className="hidden md:flex space-x-8 text-sm text-stone-500 font-medium tracking-wide">
+          <a href="#" className="text-stone-900 transition-colors">Shop</a>
+          <a href="/Web-Chomm-s-House/our-story" className="hover:text-stone-900 transition-colors">Our Story</a>
+          <a href="/Web-Chomm-s-House/workshop" className="hover:text-stone-900 transition-colors">Workshop</a>
         </div>
         
-        {/* Logo Center */}
-        <div className="flex items-center space-x-4 absolute left-1/2 transform -translate-x-1/2">
-          <div className="flex items-center space-x-2 font-bold text-lg cursor-pointer">
-            <div className="w-6 h-6 bg-blue-500 rounded flex items-center justify-center">
-               <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-            </div>
-            <span>Chomm'sHouse</span>
-          </div>
-          <div className="bg-blue-500 text-white text-xs px-4 py-1.5 rounded-full font-medium shadow-sm">PRODUCT</div>
-          <a href="#" className="text-sm text-gray-600 font-medium hover:text-black">WORKSHOP</a>
+        <div className="flex items-center space-x-2 font-serif font-medium text-xl tracking-tight text-stone-900 md:absolute md:left-1/2 md:-translate-x-1/2 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
+          <div className="w-5 h-5 bg-stone-900 rounded-sm flex items-center justify-center transform rotate-45"><div className="w-1.5 h-1.5 bg-white rounded-full"></div></div>
+          <span className="ml-1">Chomm's</span>
         </div>
 
-        <div className="flex items-center space-x-6 text-sm text-gray-600 font-medium">
-          <a href="#" className="hover:text-black">CONTACT US</a>
-          <div className="flex items-center space-x-1 cursor-pointer hover:text-black">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-            <span>Login | Sign Up</span>
-          </div>
-          <div className="relative cursor-pointer">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
-          </div>
+        <div className="flex items-center space-x-6 text-sm text-stone-500 font-medium">
+          <a href="/Web-Chomm-s-House/contact" className="hidden md:block hover:text-stone-900 transition-colors">Contact</a>
+          <HeaderActions />
         </div>
       </nav>
 
-      {/* Header */}
-      <div className="text-center mt-12 mb-10">
-        <h1 className="text-5xl font-serif font-extrabold text-gray-800 mb-2 tracking-tight">OurProduct</h1>
-        <p className="text-gray-400 text-sm">รายละเอียดสินค้า</p>
-      </div>
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-stone-100 px-5 py-4 space-y-4 shadow-sm animate-in slide-in-from-top-4">
+          <a href="#" className="block text-stone-900 font-medium">Shop</a>
+          <a href="/Web-Chomm-s-House/our-story" className="block text-stone-500">Our Story</a>
+          <a href="/Web-Chomm-s-House/workshop" className="block text-stone-500">Workshop</a>
+          <a href="/Web-Chomm-s-House/contact" className="block text-stone-500">Contact</a>
+        </div>
+      )}
 
-      <div className="max-w-6xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Left Column */}
-        <div className="max-w-md mx-auto w-full">
-          <h2 className="font-bold mb-4 text-gray-800">ตัวเลือกสินค้า</h2>
-          <div className="border border-gray-200 rounded-lg p-2 mb-6 bg-gray-50 flex items-center justify-center aspect-square shadow-sm">
-            {/* Image Placeholder (Mimicking the real flower shape) */}
-            <div className="w-full h-full bg-white rounded flex flex-col items-center justify-center overflow-hidden relative shadow-inner">
-               <div className="w-40 h-40 bg-blue-100 rounded-full flex items-center justify-center shadow-lg relative">
-                 <div className="absolute w-8 h-8 bg-blue-600 rounded-full shadow-md z-10"></div>
-                 <div className="absolute inset-0 flex items-center justify-center rotate-45"><div className="w-48 h-12 bg-blue-100 rounded-full opacity-80"></div></div>
-                 <div className="absolute inset-0 flex items-center justify-center -rotate-45"><div className="w-48 h-12 bg-blue-100 rounded-full opacity-80"></div></div>
-               </div>
-               <span className="absolute bottom-4 text-gray-400 text-xs">Product Image Preview</span>
-            </div>
+      <div className="max-w-7xl mx-auto px-5 sm:px-10 py-6 md:py-8 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        
+        <div className="w-full flex flex-col gap-4 lg:sticky lg:top-28">
+          
+          <div 
+            className="relative w-full aspect-square rounded-2xl md:rounded-3xl overflow-hidden bg-transparent group flex items-center justify-center cursor-zoom-in"
+            onClick={() => { setIsLightboxOpen(true); setIsZoomed(false); }}
+          >
+            <img 
+              src={currentImages[activeIndex]} 
+              alt="Product Main" 
+              className="w-full h-full object-cover object-center mix-blend-multiply transition-transform duration-700 ease-in-out group-hover:scale-[1.02]"
+              
+            />
           </div>
           
-          <div className="text-sm text-gray-500 mb-4 font-medium">ราคา 190 ต่อชุด</div>
-          
-          <div className="flex items-center space-x-4 mb-6">
-            <span className="text-sm font-bold text-gray-800">จำนวน*</span>
-            <div className="flex items-center border border-gray-300 rounded overflow-hidden h-9 w-32 shadow-sm">
-              <button onClick={() => setQty(Math.max(1, qty - 1))} className="flex-1 bg-white hover:bg-gray-50 text-gray-600 border-r border-gray-200 h-full flex items-center justify-center font-bold">−</button>
-              <input type="text" readOnly value={qty} className="w-12 text-center text-sm outline-none" />
-              <button onClick={() => setQty(qty + 1)} className="flex-1 bg-white hover:bg-gray-50 text-gray-600 border-l border-gray-200 h-full flex items-center justify-center font-bold">+</button>
-            </div>
-            <span className="text-sm text-gray-400">ชุด</span>
+          <div className="grid grid-cols-6 gap-2 md:gap-3">
+            {currentImages.map((img, idx) => (
+              <button 
+                key={idx} 
+                onClick={() => { setActiveIndex(idx); setSlideDelay(10000); }} 
+                className={`relative w-full aspect-square rounded-xl md:rounded-2xl overflow-hidden transition-all duration-300 ${activeIndex === idx ? 'ring-2 ring-stone-900 ring-offset-2 scale-95' : 'opacity-60 hover:opacity-100 bg-transparent border border-stone-100'}`}
+              >
+                <img 
+                  src={img} 
+                  alt={`Thumb ${idx}`} 
+                  className="w-full h-full object-cover object-center mix-blend-multiply p-1 transition-all duration-700 ease-in-out"
+                  
+                />
+              </button>
+            ))}
           </div>
-
-          <div className="bg-[#f8f9fa] border border-gray-100 rounded-lg p-4 flex justify-between items-center mb-6">
-            <span className="text-sm font-medium text-gray-600">ราคาสุทธิ</span>
-            <div className="flex items-baseline">
-              <span className="text-3xl font-extrabold text-blue-500 mr-2">{190 * qty}</span>
-              <span className="text-sm text-gray-500 font-medium">บาท</span>
-            </div>
-          </div>
-
-          <button className="w-full bg-[#2a68df] hover:bg-blue-700 text-white font-medium py-3.5 rounded-full flex items-center justify-center space-x-2 transition-all shadow-md">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-            <span>สั่งสินค้า/สอบถาม</span>
-          </button>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-8 max-w-md">
-          {/* Colors */}
-          <div>
-            <div className="text-sm font-bold text-gray-800 mb-3 flex items-center">ตัวเลือกสี*</div>
-            <div className="flex space-x-3 relative">
-              {colors.map((c, i) => (
-                <div key={i} className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer ${i === 3 ? 'ring-2 ring-blue-500 ring-offset-2' : 'border border-gray-200 shadow-sm'}`} style={{ backgroundColor: c.hex }}>
-                  {i === 3 && (
-                    <div className="absolute -top-6 bg-black text-white text-[10px] px-2 py-1 rounded">
-                      สีผงถ่าน
-                    </div>
-                  )}
-                  {i === 3 && (
-                    <div className="absolute mt-8 ml-6 w-4 h-4 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
-                      <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="w-full flex flex-col pt-2 lg:pt-4">
+          <h1 className="text-3xl md:text-4xl font-serif text-stone-900 tracking-tight mb-2">Aroma Wax Sachet</h1>
+          <p className="text-2xl font-medium text-stone-800 mb-6">฿ 190</p>
+          <p className="text-stone-500 text-sm leading-relaxed mb-8">
+            แว็กซ์หอมปรับอากาศทำมือ ผสานดอกไม้แห้งธรรมชาติ สร้างบรรยากาศผ่อนคลายให้ทุกพื้นที่ของคุณอย่างลงตัว
+          </p>
 
-          {/* Decorations */}
-          <div>
-            <div className="text-sm font-bold text-gray-800 mb-3">ประดับ*</div>
-            <div className="flex flex-wrap gap-2.5">
-              {decorations.map((d, i) => (
-                <button key={i} className={`px-5 py-2 rounded-full text-sm transition-colors ${i === 0 ? 'bg-blue-50 border border-blue-300 text-blue-600' : 'border border-gray-200 text-gray-500 hover:border-gray-300'}`}>
-                  {d}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Size */}
-          <div>
-            <div className="text-sm font-bold text-gray-800 mb-3">ขนาด*</div>
-            <div className="flex flex-wrap gap-2.5">
-              {sizes.map((s, i) => (
-                <button key={i} className={`px-5 py-2 rounded-full text-sm transition-colors ${i === 2 ? 'border border-blue-500 text-blue-600' : 'border border-gray-200 text-gray-500 hover:border-gray-300'}`}>
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Scent */}
-          <div>
-            <div className="text-sm font-bold text-gray-800 mb-3">กลิ่น*</div>
-            <div className="flex flex-wrap gap-2.5">
-              {scents.map((s, i) => (
-                <button key={i} className={`px-5 py-2 rounded-full text-sm transition-colors ${i === 2 ? 'bg-[#2a68df] text-white shadow-md' : 'border border-gray-200 text-gray-500 hover:border-gray-300'}`}>
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Packaging */}
-          <div>
-            <div className="text-sm font-bold text-gray-800 mb-3">บรรจุภัณฑ์*</div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="border border-gray-100 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center text-center cursor-pointer">
-                <div className="w-12 h-12 border-2 border-dashed border-gray-300 rounded mb-2 flex items-center justify-center text-[9px] text-gray-400 font-medium">LOGO</div>
-                <div className="text-xs text-gray-600 font-medium">ซองใส<br/><span className="text-[9px] text-gray-400">12x12 cm.</span></div>
-              </div>
-              <div className="border border-gray-100 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center text-center cursor-pointer">
-                <div className="w-12 h-12 flex items-center justify-center mb-2">
-                   <div className="w-6 h-6 bg-gray-800 rounded-sm transform rotate-45 relative">
-                     <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-white rounded-full"></div>
-                   </div>
-                </div>
-                <div className="text-xs text-gray-600 font-medium">ซองแก้ว<br/><span className="text-[9px] text-gray-400">10x15 cm.</span></div>
-              </div>
-              <div className="border-2 border-blue-500 rounded-xl p-1 relative cursor-pointer shadow-sm">
-                <div className="absolute -top-2 -right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white border-2 border-white shadow-sm">
-                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-                </div>
-                <div className="bg-amber-900 bg-opacity-90 h-16 rounded-lg overflow-hidden flex items-center justify-center border-4 border-amber-800 mb-1 relative">
-                   <div className="absolute inset-x-2 bottom-2 h-4 bg-teal-600 rounded opacity-80"></div>
-                </div>
-                <div className="text-center text-xs text-gray-800 font-medium pb-1 mt-2">กล่องลิ้นชัก<br/><span className="text-[9px] text-gray-400">16x10.2x5.5cm.</span></div>
-              </div>
-            </div>
+          <div className="space-y-8">
             
-            <label className="flex items-center space-x-2 mt-5 cursor-pointer">
-              <div className="w-5 h-5 bg-blue-500 rounded flex items-center justify-center border border-blue-500">
-                <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+            <div>
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-sm font-bold text-stone-900 tracking-wide">สีแว็กซ์ (Color)</span>
+                <span className="text-xs text-stone-400 font-medium capitalize">{selectedColor}</span>
               </div>
-              <span className="text-sm text-gray-600">ต้องการเพิ่มสติกเกอร์โลโก้</span>
-            </label>
+              <div className="flex flex-wrap gap-3">
+                {colors.map(color => (
+                  <button 
+                    key={color.id}
+                    onClick={() => handleColorClick(color.id)}
+                    className={`relative w-12 h-12 rounded-full transition-transform active:scale-95 ${selectedColor === color.id ? 'ring-1 ring-stone-900 ring-offset-4' : 'hover:scale-105'}`}
+                    style={{ backgroundColor: color.hex }}
+                    title={color.label}
+                  >
+                    {selectedColor === color.id && color.id === 'white' && (
+                      <svg className="w-5 h-5 absolute inset-0 m-auto text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                    )}
+                    {selectedColor === color.id && color.id !== 'white' && (
+                      <svg className="w-5 h-5 absolute inset-0 m-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <span className="text-sm font-bold text-stone-900 tracking-wide block mb-3">ดอกไม้ประดับ (Decoration)</span>
+              <div className="flex flex-wrap gap-2">
+                {decorations.map(decor => (
+                  <button 
+                    key={decor}
+                    onClick={() => setSelectedDecoration(decor)}
+                    className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${selectedDecoration === decor ? 'bg-stone-900 text-white shadow-md' : 'bg-white border border-stone-200 text-stone-600 hover:border-stone-400'}`}
+                  >
+                    {decor}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <span className="text-sm font-bold text-stone-900 tracking-wide block mb-3">ขนาด (Size)</span>
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                {sizes.map(size => (
+                  <button 
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`py-3 rounded-xl text-sm font-medium transition-all ${selectedSize === size ? 'border-2 border-stone-900 text-stone-900 bg-stone-50' : 'border border-stone-200 text-stone-500 hover:border-stone-400'}`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <span className="text-sm font-bold text-stone-900 tracking-wide block mb-3">กลิ่นหอม (Scent)</span>
+              <div className="flex flex-wrap gap-2">
+                {scents.map(scent => (
+                  <button 
+                    key={scent}
+                    onClick={() => setSelectedScent(scent)}
+                    className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${selectedScent === scent ? 'bg-stone-900 text-white shadow-md' : 'bg-white border border-stone-200 text-stone-600 hover:border-stone-400'}`}
+                  >
+                    {scent}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <span className="text-sm font-bold text-stone-900 tracking-wide block mb-3">บรรจุภัณฑ์ (Packaging)</span>
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                {['ของใส', 'ซองแก้ว', 'กล่องลิ้นชัก'].map(pkg => (
+                  <button 
+                    key={pkg}
+                    onClick={() => setSelectedPackaging(pkg)}
+                    className={`py-6 flex flex-col items-center justify-center rounded-2xl transition-all ${selectedPackaging === pkg ? 'border-2 border-stone-900 text-stone-900 bg-stone-50 shadow-sm' : 'border border-stone-200 text-stone-400 hover:border-stone-400'}`}
+                  >
+                    {pkg === 'ของใส' && <div className="w-8 h-8 rounded border border-stone-200 mb-2 flex items-center justify-center text-[8px]">LOGO</div>}
+                    {pkg === 'ซองแก้ว' && <div className="w-8 h-8 rounded border border-stone-200 mb-2 transform rotate-45 scale-75"></div>}
+                    {pkg === 'กล่องลิ้นชัก' && <div className="w-8 h-6 rounded bg-stone-700 mb-2"></div>}
+                    <span className="text-xs font-medium">{pkg}</span>
+                  </button>
+                ))}
+              </div>
+              
+              <label className="flex items-center space-x-3 mt-4 cursor-pointer group w-max">
+                <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${addLogoSticker ? 'bg-stone-900 border border-stone-900' : 'border border-stone-300 group-hover:border-stone-400'}`}>
+                  {addLogoSticker && <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
+                </div>
+                <span className={`text-sm transition-colors duration-200 ${addLogoSticker ? 'text-stone-900 font-medium' : 'text-stone-500'}`}>ติดสติกเกอร์โลโก้แบรนด์</span>
+              </label>
+            </div>
+
+            <hr className="border-stone-100 my-2" />
+
+            <div className="hidden lg:flex items-center gap-6">
+              <div className="flex items-center bg-white border border-stone-200 rounded-full h-14 w-40 overflow-hidden shadow-sm">
+                <button onClick={() => setQty(Math.max(1, qty - 1))} className="flex-1 hover:bg-stone-50 text-stone-600 h-full flex items-center justify-center text-xl transition-colors">−</button>
+                <input type="text" readOnly value={qty} className="w-12 text-center text-base bg-transparent outline-none font-medium text-stone-900" />
+                <button onClick={() => setQty(qty + 1)} className="flex-1 hover:bg-stone-50 text-stone-600 h-full flex items-center justify-center text-xl transition-colors">+</button>
+              </div>
+
+              <button onClick={handleAddToCart} className="flex-1 bg-stone-900 hover:bg-stone-800 text-white font-medium py-4 px-8 rounded-full flex items-center justify-center space-x-3 transition-transform active:scale-[0.98] shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                <span className="text-lg">สั่งซื้อสินค้า</span>
+                <span className="w-1.5 h-1.5 bg-white/30 rounded-full"></span>
+                <span className="text-lg">฿ {totalPrice.toLocaleString()}</span>
+              </button>
+            </div>
+
           </div>
-
-          {/* Add-ons */}
-          <div className="bg-[#fcfcfc] rounded-xl p-5 border border-gray-100 shadow-sm mt-8">
-            <div className="text-sm font-bold text-gray-800 mb-4">ตัวเลือกเพิ่มเติม</div>
-            
-            <div className="flex space-x-2 mb-5">
-               <button className="px-5 py-2 rounded-full text-sm border bg-blue-50 border-blue-300 text-blue-600">ดอกไม้หอม</button>
-               <button className="px-5 py-2 rounded-full text-sm border border-gray-200 text-gray-500 bg-white">WAX หอม</button>
-            </div>
-
-            <div className="flex items-center space-x-3 mb-5">
-              <span className="text-sm text-gray-600">เพิ่มจำนวน</span>
-              <div className="flex items-center border border-gray-200 rounded bg-white w-20">
-                <input type="text" readOnly value="1" className="w-full h-8 text-center text-sm outline-none bg-transparent" />
-              </div>
-              <span className="text-sm text-gray-600">ชิ้น/ชุด</span>
-            </div>
-
-            <div className="mb-2">
-              <span className="text-sm text-gray-600 block mb-3">ขนาด</span>
-              <div className="flex space-x-2">
-                <button className="px-4 py-1.5 rounded-full text-xs border border-gray-200 bg-white text-gray-500">10-15 กรัม</button>
-                <button className="px-4 py-1.5 rounded-full text-xs border border-blue-500 text-blue-600 bg-white font-medium">20-25 กรัม</button>
-                <button className="px-4 py-1.5 rounded-full text-xs border border-gray-200 bg-white text-gray-500">30-35 กรัม</button>
-              </div>
-            </div>
-            
-            <div className="text-[11px] text-gray-400 mt-4 font-medium">*ใช้กลิ่นเดียวกับชิ้นแรกเพื่อกันกลิ่นตีกัน</div>
-          </div>
-
         </div>
       </div>
       
-      <footer className="text-center mt-20 text-xs text-gray-400 font-medium pb-8">
-        © 2024 Chomm's-House. Handcrafted with care.
-      </footer>
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-stone-200 p-4 px-5 flex items-center justify-between z-40 pb-safe shadow-[0_-10px_40px_rgb(0,0,0,0.05)]">
+        <div className="flex flex-col">
+          <span className="text-xs text-stone-500 mb-0.5">ราคาสุทธิ</span>
+          <span className="text-xl font-bold text-stone-900">฿ {totalPrice.toLocaleString()}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center bg-stone-50 border border-stone-200 rounded-full h-12 w-28 overflow-hidden">
+            <button onClick={() => setQty(Math.max(1, qty - 1))} className="flex-1 text-stone-600 h-full flex items-center justify-center text-lg active:bg-stone-200">−</button>
+            <span className="w-8 text-center text-sm font-medium text-stone-900">{qty}</span>
+            <button onClick={() => setQty(qty + 1)} className="flex-1 text-stone-600 h-full flex items-center justify-center text-lg active:bg-stone-200">+</button>
+          </div>
+          <button onClick={handleAddToCart} className="bg-stone-900 text-white px-7 py-3.5 rounded-full font-medium shadow-lg active:scale-95 transition-transform text-sm">
+            สั่งซื้อ
+          </button>
+        </div>
+      </div>
+
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          <button 
+            className="absolute top-6 right-6 z-[210] p-3 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 rounded-full transition-all"
+            onClick={(e) => { e.stopPropagation(); setIsLightboxOpen(false); }}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+
+          <div 
+            className="relative w-full h-full p-4 md:p-12 flex items-center justify-center overflow-auto hide-scrollbar"
+            style={{ touchAction: 'pan-x pan-y pinch-zoom' }}
+          >
+            <img 
+              src={currentImages[activeIndex]} 
+              alt="Product Fullscreen" 
+              className={`max-w-full max-h-full object-contain origin-center transition-transform duration-300 ${isZoomed ? 'scale-[2.5] md:scale-[2.0] cursor-zoom-out' : 'scale-100 cursor-zoom-in'}`}
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                setIsZoomed(!isZoomed); 
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .pb-safe {
+          padding-bottom: max(1rem, env(safe-area-inset-bottom));
+        }
+      `}</style>
     </div>
   );
 }
