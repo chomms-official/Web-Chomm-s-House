@@ -152,19 +152,19 @@ export default function OurStoryPage() {
               <h4 className="text-xl font-bold text-[#3b3228] mb-4 font-sans">ตัวเลือกสี</h4>
               <div className="grid grid-cols-4 gap-3">
                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
-                    <div className="w-12 h-12 bg-white rounded-full shadow-md overflow-hidden flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-white.png" className="w-full h-full object-cover mix-blend-multiply" alt="White" /></div>
+                    <div className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-white.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="White" /></div>
                     <span className="text-xs text-[#3b3228] font-medium">สีธรรมชาติ</span>
                  </div>
                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
-                    <div className="w-12 h-12 bg-[#D2DAC5] rounded-full shadow-md overflow-hidden flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-lightgreen.png" className="w-full h-full object-cover mix-blend-multiply" alt="Light Green" /></div>
+                    <div className="w-12 h-12 bg-[#D2DAC5] rounded-full shadow-md flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-lightgreen.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="Light Green" /></div>
                     <span className="text-xs text-[#3b3228] font-medium">ใบเตย</span>
                  </div>
                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
-                    <div className="w-12 h-12 bg-[#DCE495] rounded-full shadow-md overflow-hidden flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-lime.png" className="w-full h-full object-cover mix-blend-multiply" alt="Lime" /></div>
+                    <div className="w-12 h-12 bg-[#DCE495] rounded-full shadow-md flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-lime.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="Lime" /></div>
                     <span className="text-xs text-[#3b3228] font-medium">ขมิ้น</span>
                  </div>
                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
-                    <div className="w-12 h-12 bg-white rounded-full shadow-md overflow-hidden flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-charcoal.png" className="w-full h-full object-cover mix-blend-multiply" alt="Charcoal" /></div>
+                    <div className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-charcoal.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="Charcoal" /></div>
                     <span className="text-xs text-[#3b3228] font-medium">ผงถ่าน</span>
                  </div>
               </div>
@@ -240,3 +240,6 @@ export default function OurStoryPage() {
     </div>
   );
 }
+
+
+

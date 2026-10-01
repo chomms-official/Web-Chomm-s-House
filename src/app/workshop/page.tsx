@@ -84,7 +84,7 @@ export default function WorkshopPage() {
 
          {/* Contact Button Section */}
          <div className="mb-24 flex justify-center w-full">
-            <a href="/Web-Chomm-s-House/contact" className="bg-[#433324] hover:bg-[#2c2117] text-white px-8 md:px-12 py-4 md:py-5 rounded-full flex items-center space-x-4 transition-colors shadow-lg hover:shadow-xl shadow-[#433324]/20 group">
+            <a href="https://lin.ee/VAbHOnM" target="_blank" rel="noopener noreferrer" className="bg-[#433324] hover:bg-[#2c2117] text-white px-8 md:px-12 py-4 md:py-5 rounded-full flex items-center space-x-4 transition-colors shadow-lg hover:shadow-xl shadow-[#433324]/20 group">
                {/* LINE icon (simulated) */}
                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                   <span className="text-[#433324] font-bold text-[10px] tracking-tighter">LINE</span>
@@ -144,3 +144,5 @@ export default function WorkshopPage() {
     </div>
   );
 }
+
+

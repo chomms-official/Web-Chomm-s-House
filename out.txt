@@ -1,0 +1,3 @@
+302:                 {['ของใส', 'ซองแก้ว', 'กล่องลิ้นชัก'].map(pkg => (
+308:                     {pkg === 'ของใส' && <img src="/Web-Chomm-s-House/images/packaging-clear.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองใส" />}
+309:                     {pkg === 'ซองแก้ว' && <img src="/Web-Chomm-s-House/images/packaging-organza.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองแก้ว" />}

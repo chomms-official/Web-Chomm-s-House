@@ -16,21 +16,21 @@ export default function ProductPage() {
       '/Web-Chomm-s-House/images/white-bottom.png'
     ],
     'light-green': [
-      '/Web-Chomm-s-House/images/light-green-front-v2.png',
-      '/Web-Chomm-s-House/images/light-green-left-v2.png',
-      '/Web-Chomm-s-House/images/light-green-right-v2.png',
-      '/Web-Chomm-s-House/images/light-green-top-v2.png',
-      '/Web-Chomm-s-House/images/light-green-back-v2.png',
-      '/Web-Chomm-s-House/images/light-green-bottom-v2.png'
-    ],
+        '/Web-Chomm-s-House/images/light-green-front-v3.png',
+        '/Web-Chomm-s-House/images/light-green-left-v3.png',
+        '/Web-Chomm-s-House/images/light-green-right-v3.png',
+        '/Web-Chomm-s-House/images/light-green-top-v3.png',
+        '/Web-Chomm-s-House/images/light-green-back-v3.png',
+        '/Web-Chomm-s-House/images/light-green-bottom-v3.png'
+      ],
     'lime': [
-      getPlaceholder('Lime - Front'),
-      getPlaceholder('Lime - Left'),
-      getPlaceholder('Lime - Right'),
-      getPlaceholder('Lime - Top'),
-      getPlaceholder('Lime - Back'),
-      getPlaceholder('Lime - Bottom')
-    ],
+        '/Web-Chomm-s-House/images/lime-front-v2.png',
+        '/Web-Chomm-s-House/images/lime-left-v2.png',
+        '/Web-Chomm-s-House/images/lime-right-v2.png',
+        '/Web-Chomm-s-House/images/lime-top-v2.png',
+        '/Web-Chomm-s-House/images/lime-back-v2.png',
+        '/Web-Chomm-s-House/images/lime-bottom-v2.png'
+      ],
     'charcoal': [
       '/Web-Chomm-s-House/images/charcoal-front-v2.jpg',
       '/Web-Chomm-s-House/images/charcoal-left-v2.jpg',
@@ -74,9 +74,9 @@ export default function ProductPage() {
   }, [currentImages.length, activeIndex, slideDelay, isLightboxOpen]);
 
   const colors = [
-    { id: 'white', hex: '#FDFBF7', label: 'White' },
-    { id: 'light-green', hex: '#D2DAC5', label: 'Light Green' },
-    { id: 'lime', hex: '#DCE495', label: 'Lime' },
+    { id: 'white', hex: '#FDFBF7', label: 'Natural' },
+    { id: 'light-green', hex: '#D2DAC5', label: 'Pandan' },
+    { id: 'lime', hex: '#DCE495', label: 'Turmeric' },
     { id: 'charcoal', hex: '#3F3F46', label: 'Charcoal' }
   ];
 
@@ -230,7 +230,7 @@ export default function ProductPage() {
             <div>
               <div className="flex justify-between items-center mb-3">
                 <span className="text-sm font-bold text-stone-900 tracking-wide">สีแว็กซ์ (Color)</span>
-                <span className="text-xs text-stone-400 font-medium capitalize">{selectedColor}</span>
+                <span className="text-xs text-stone-400 font-medium capitalize">{colors.find(c => c.id === selectedColor)?.label}</span>
               </div>
               <div className="flex flex-wrap gap-3">
                 {colors.map(color => (
@@ -300,16 +300,16 @@ export default function ProductPage() {
             <div>
               <span className="text-sm font-bold text-stone-900 tracking-wide block mb-3">บรรจุภัณฑ์ (Packaging)</span>
               <div className="grid grid-cols-3 gap-2 md:gap-3">
-                {['ของใส', 'ซองแก้ว', 'กล่องลิ้นชัก'].map(pkg => (
+                {['ซองใส', 'ซองแก้ว', 'กล่องลิ้นชัก'].map(pkg => (
                   <button 
                     key={pkg}
                     onClick={() => setSelectedPackaging(pkg)}
-                    className={`py-6 flex flex-col items-center justify-center rounded-2xl transition-all ${selectedPackaging === pkg ? 'border-2 border-stone-900 text-stone-900 bg-stone-50 shadow-sm' : 'border border-stone-200 text-stone-400 hover:border-stone-400'}`}
+                    className={`p-2 flex flex-col items-center justify-center rounded-2xl transition-all h-full min-h-[140px] ${selectedPackaging === pkg ? 'border-2 border-stone-900 text-stone-900 bg-stone-50 shadow-sm' : 'border border-stone-200 text-stone-400 hover:border-stone-400'}`}
                   >
-                    {pkg === 'ของใส' && <div className="w-8 h-8 rounded border border-stone-200 mb-2 flex items-center justify-center text-[8px]">LOGO</div>}
-                    {pkg === 'ซองแก้ว' && <div className="w-8 h-8 rounded border border-stone-200 mb-2 transform rotate-45 scale-75"></div>}
-                    {pkg === 'กล่องลิ้นชัก' && <div className="w-8 h-6 rounded bg-stone-700 mb-2"></div>}
-                    <span className="text-xs font-medium">{pkg}</span>
+                    {pkg === 'ซองใส' && <img src="/Web-Chomm-s-House/images/packaging-clear.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองใส" />}
+                    {pkg === 'ซองแก้ว' && <img src="/Web-Chomm-s-House/images/packaging-organza.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองแก้ว" />}
+                    {pkg === 'กล่องลิ้นชัก' && <img src="/Web-Chomm-s-House/images/packaging-box.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="กล่องลิ้นชัก" />}
+                    {/* removed redundant text */}
                   </button>
                 ))}
               </div>
