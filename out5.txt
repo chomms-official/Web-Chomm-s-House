@@ -1,0 +1,15 @@
+160:         <div className="hidden md:flex space-x-8 text-sm text-stone-500 font-medium tracking-wide">
+161:           <a href="#" className="text-stone-900 transition-colors">Shop</a>
+162:           <a href="/Web-Chomm-s-House/our-story" className="hover:text-stone-900 transition-colors">Our Story</a>
+163:           <a href="/Web-Chomm-s-House/workshop" className="hover:text-stone-900 transition-colors">Workshop</a>
+164:         </div>
+165:         
+166:         <div className="flex items-center space-x-2 font-serif font-medium text-xl tracking-tight text-stone-900 md:absolute md:left-1/2 md:-translate-x-1/2 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
+167:           <div className="w-5 h-5 bg-stone-900 rounded-sm flex items-center justify-center transform rotate-45"><div className="w-1.5 h-1.5 bg-white rounded-full"></div></div>
+168:           <span className="ml-1">Chomm's</span>
+169:         </div>
+170: 
+171:         <div className="flex items-center space-x-6 text-sm text-stone-500 font-medium">
+172:           <a href="/Web-Chomm-s-House/contact" className="hidden md:block hover:text-stone-900 transition-colors">Contact</a>
+173:           <HeaderActions />
+174:         </div>

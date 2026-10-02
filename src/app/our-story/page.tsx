@@ -21,8 +21,8 @@ export default function OurStoryPage() {
         </div>
         
         <a href="/Web-Chomm-s-House/" className="flex items-center space-x-2 font-serif font-medium text-xl tracking-tight text-stone-900 md:absolute md:left-1/2 md:-translate-x-1/2 cursor-pointer">
-          <div className="w-5 h-5 bg-stone-900 rounded-sm flex items-center justify-center transform rotate-45"><div className="w-1.5 h-1.5 bg-white rounded-full"></div></div>
-          <span className="ml-1">Chomm's</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" className="w-5 h-5 text-stone-900"><path d="M 10 10 Q 10 4 12 2 Q 14 4 14 10 Q 20 10 22 12 Q 20 14 14 14 Q 14 20 12 22 Q 10 20 10 14 Q 4 14 2 12 Q 4 10 10 10 Z" /></svg>
+          <span className="ml-1">Chomm's House</span>
         </a>
 
         <div className="flex items-center space-x-6 text-sm text-stone-500 font-medium">
@@ -55,10 +55,10 @@ export default function OurStoryPage() {
           <h1 className="text-6xl md:text-8xl font-serif italic text-white drop-shadow-md">
             Chomm's
             <br />
-            <span className="flex items-center justify-center space-x-3 mt-4 text-3xl md:text-5xl tracking-[0.3em] font-sans not-italic font-medium">
+            <span className="flex items-center justify-center space-x-3 md:space-x-4 mt-4 text-4xl md:text-6xl font-serif italic font-medium">
               <span>H</span>
-              <svg className="w-8 h-8 md:w-10 md:h-10 text-[#dce495]" viewBox="0 0 24 24" fill="currentColor">
-                 <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+              <svg className="w-10 h-10 md:w-16 md:h-16 text-[#dce495]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
+                 <path d="M 10 10 Q 10 4 12 2 Q 14 4 14 10 Q 20 10 22 12 Q 20 14 14 14 Q 14 20 12 22 Q 10 20 10 14 Q 4 14 2 12 Q 4 10 10 10 Z" />
               </svg>
               <span>USE</span>
             </span>

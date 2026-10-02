@@ -1,0 +1,20 @@
+50:             <h3 className="text-white font-sans tracking-[0.3em] text-sm md:text-base font-medium">โอมเฮาส์</h3>
+51:             <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+52:           </div>
+53:           
+54:           <h1 className="text-6xl md:text-8xl font-serif italic text-white drop-shadow-md">
+55:             Chomm's
+56:             <br />
+57:             <span className="flex items-center justify-center space-x-3 mt-4 text-3xl md:text-5xl tracking-[0.3em] font-sans not-italic font-medium">
+58:               <span>H</span>
+59:               <svg className="w-8 h-8 md:w-10 md:h-10 text-[#dce495]" viewBox="0 0 24 24" fill="currentColor">
+60:                  <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+61:               </svg>
+62:               <span>USE</span>
+63:             </span>
+64:           </h1>
+65:           
+66:           <p className="mt-8 text-white italic font-serif text-lg md:text-xl font-light tracking-wide pt-4">
+67:             Where the scent, Carry the Story
+68:           </p>
+69:         </div>

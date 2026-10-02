@@ -1,0 +1,34 @@
+10:       '/Web-Chomm-s-House/images/white-front.png',
+11:       '/Web-Chomm-s-House/images/white-left.png',
+12:       '/Web-Chomm-s-House/images/white-right.png',
+13:       '/Web-Chomm-s-House/images/white-top.png',
+14:       '/Web-Chomm-s-House/images/white-back.png',
+15:       '/Web-Chomm-s-House/images/white-bottom.png'
+18:         '/Web-Chomm-s-House/images/light-green-front-v3.png',
+19:         '/Web-Chomm-s-House/images/light-green-left-v3.png',
+20:         '/Web-Chomm-s-House/images/light-green-right-v3.png',
+21:         '/Web-Chomm-s-House/images/light-green-top-v3.png',
+22:         '/Web-Chomm-s-House/images/light-green-back-v3.png',
+23:         '/Web-Chomm-s-House/images/light-green-bottom-v3.png'
+26:         '/Web-Chomm-s-House/images/lime-front-v2.png',
+27:         '/Web-Chomm-s-House/images/lime-left-v2.png',
+28:         '/Web-Chomm-s-House/images/lime-right-v2.png',
+29:         '/Web-Chomm-s-House/images/lime-top-v2.png',
+30:         '/Web-Chomm-s-House/images/lime-back-v2.png',
+31:         '/Web-Chomm-s-House/images/lime-bottom-v2.png'
+34:       '/Web-Chomm-s-House/images/charcoal-front-v2.jpg',
+35:       '/Web-Chomm-s-House/images/charcoal-left-v2.jpg',
+36:       '/Web-Chomm-s-House/images/charcoal-right-v2.jpg',
+37:       '/Web-Chomm-s-House/images/charcoal-top-v2.jpg',
+38:       '/Web-Chomm-s-House/images/charcoal-back-v2.jpg',
+39:       '/Web-Chomm-s-House/images/charcoal-bottom-v2.jpg'
+162:           <a href="/Web-Chomm-s-House/our-story" className="hover:text-stone-900 transition-colors">Our Story</a>
+163:           <a href="/Web-Chomm-s-House/workshop" className="hover:text-stone-900 transition-colors">Workshop</a>
+168:           <span className="ml-1">Chomm's</span>
+172:           <a href="/Web-Chomm-s-House/contact" className="hidden md:block hover:text-stone-900 transition-colors">Contact</a>
+180:           <a href="/Web-Chomm-s-House/our-story" className="block text-stone-500">Our Story</a>
+181:           <a href="/Web-Chomm-s-House/workshop" className="block text-stone-500">Workshop</a>
+182:           <a href="/Web-Chomm-s-House/contact" className="block text-stone-500">Contact</a>
+308:                     {pkg === 'ซองใส' && <img src="/Web-Chomm-s-House/images/packaging-clear.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองใส" />}
+309:                     {pkg === 'ซองแก้ว' && <img src="/Web-Chomm-s-House/images/packaging-organza.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองแก้ว" />}
+310:                     {pkg === 'กล่องลิ้นชัก' && <img src="/Web-Chomm-s-House/images/packaging-box.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="กล่องลิ้นชัก" />}

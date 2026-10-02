@@ -1,0 +1,30 @@
+40:       )}
+41: 
+42:       {/* Main Content */}
+43:       <div className="flex-grow max-w-6xl w-full mx-auto px-4 md:px-8 py-16 flex flex-col items-center">
+44:          
+45:          {/* Hero Title */}
+46:          <div className="w-full flex flex-col items-center mb-12">
+47:             <h1 className="text-5xl md:text-7xl font-serif italic text-[#3b3228] mb-3 font-medium tracking-tight">Our Workshop</h1>
+48:             <p className="text-stone-500 font-sans text-lg tracking-wide">กิจกรรมของพวกเรา</p>
+49:          </div>
+50: 
+51:          {/* Collage Grid Layout Placeholder */}
+52:          <div className="w-full mb-24">
+53:              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[150px] md:auto-rows-[200px]">
+54:                  {/* Row 1 */}
+55:                  <div className="col-span-2 row-span-2 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
+56:                      <span className="text-stone-400 font-medium">รอรูปภาพ 1 (ขนาดใหญ่)</span>
+57:                  </div>
+58:                  <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
+59:                      <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 2</span>
+60:                  </div>
+61:                  <div className="col-span-1 row-span-2 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
+62:                      <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 3 (แนวตั้ง)</span>
+63:                  </div>
+64:                  {/* Row 2 */}
+65:                  <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
+66:                      <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 4</span>
+67:                  </div>
+68:                  {/* Row 3 */}
+69:                  <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
