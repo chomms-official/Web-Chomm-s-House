@@ -1,3 +1,20 @@
-302:                 {['ของใส', 'ซองแก้ว', 'กล่องลิ้นชัก'].map(pkg => (
-308:                     {pkg === 'ของใส' && <img src="/Web-Chomm-s-House/images/packaging-clear.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองใส" />}
-309:                     {pkg === 'ซองแก้ว' && <img src="/Web-Chomm-s-House/images/packaging-organza.png" className="w-full h-auto object-contain mix-blend-multiply rounded-xl" alt="ซองแก้ว" />}
+150:               
+151:               <h4 className="text-xl font-bold text-[#3b3228] mb-4 font-sans">ตัวเลือกสี</h4>
+152:               <div className="grid grid-cols-4 gap-3">
+153:                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
+154:                     <div className="w-16 h-16 flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-white.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="White" /></div>
+155:                     <span className="text-xs text-[#3b3228] font-medium">สีธรรมชาติ</span>
+156:                  </div>
+157:                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
+158:                     <div className="w-16 h-16 flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-lightgreen.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="Light Green" /></div>
+159:                     <span className="text-xs text-[#3b3228] font-medium">ใบเตย</span>
+160:                  </div>
+161:                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
+162:                     <div className="w-16 h-16 flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-lime.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="Lime" /></div>
+163:                     <span className="text-xs text-[#3b3228] font-medium">ขมิ้น</span>
+164:                  </div>
+165:                  <div className="bg-[#f8f7f5] rounded-xl p-4 flex flex-col items-center justify-center aspect-square gap-3 shadow-sm border border-stone-100">
+166:                     <div className="w-16 h-16 flex items-center justify-center"><img src="/Web-Chomm-s-House/images/color-charcoal.png" className="w-full h-full object-contain p-1 mix-blend-multiply" alt="Charcoal" /></div>
+167:                     <span className="text-xs text-[#3b3228] font-medium">ผงถ่าน</span>
+168:                  </div>
+169:               </div>

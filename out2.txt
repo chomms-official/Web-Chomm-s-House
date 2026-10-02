@@ -1,0 +1,6 @@
+237:                     key={color.id}
+238:                     onClick={() => handleColorClick(color.id)}
+239:                     className={`relative w-12 h-12 rounded-full transition-transform active:scale-95 ${selectedColor === color.id ? 'ring-1 ring-stone-900 ring-offset-4' : 'hover:scale-105'}`}
+240:                     style={{ backgroundColor: color.hex }}
+243:                     {selectedColor === color.id && color.id === 'white' && (
+246:                     {selectedColor === color.id && color.id !== 'white' && (
