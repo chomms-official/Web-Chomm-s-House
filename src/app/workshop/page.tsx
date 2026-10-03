@@ -18,6 +18,7 @@ export default function WorkshopPage() {
           <a href="/Web-Chomm-s-House/" className="hover:text-stone-900 transition-colors">Shop</a>
           <a href="/Web-Chomm-s-House/our-story" className="hover:text-stone-900 transition-colors">Our Story</a>
           <a href="/Web-Chomm-s-House/workshop" className="text-stone-900 transition-colors">Workshop</a>
+          <a href="/Web-Chomm-s-House/gallery" className="hover:text-stone-900 transition-colors">Gallery</a>
         </div>
         
         <a href="/Web-Chomm-s-House/" className="flex items-center space-x-2 font-serif font-medium text-xl tracking-tight text-stone-900 md:absolute md:left-1/2 md:-translate-x-1/2 cursor-pointer">
@@ -36,6 +37,7 @@ export default function WorkshopPage() {
           <a href="/Web-Chomm-s-House/" className="block text-stone-500">Shop</a>
           <a href="/Web-Chomm-s-House/our-story" className="block text-stone-500">Our Story</a>
           <a href="/Web-Chomm-s-House/workshop" className="block text-stone-900 font-medium">Workshop</a>
+          <a href="/Web-Chomm-s-House/gallery" className="block text-stone-500">Gallery</a>
           <a href="/Web-Chomm-s-House/contact" className="block text-stone-500">Contact</a>
         </div>
       )}
