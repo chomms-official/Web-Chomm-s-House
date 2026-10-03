@@ -1,9 +1,37 @@
 'use client';
 import HeaderActions from '@/components/HeaderActions';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+const ORGANIZATIONS = [
+  { name: 'Sustainability Expo (SX)', src: '/Web-Chomm-s-House/images/org-sx.png', size: 'max-w-[85%] max-h-[65%]' },
+  { name: 'มูลนิธิรากแก้ว', src: '/Web-Chomm-s-House/images/org-raakkaew.png', size: 'max-w-[60%] max-h-[85%]' },
+  { name: 'Enactus', src: '/Web-Chomm-s-House/images/org-enactus.png', size: 'max-w-[85%] max-h-[70%]' },
+  { name: 'Siam University', src: '/Web-Chomm-s-House/images/org-siam.png', size: 'max-w-[85%] max-h-[60%]' },
+];
 
 export default function WorkshopPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [orgVisible, setOrgVisible] = useState(false);
+  const orgGridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = orgGridRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setOrgVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setOrgVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#fafaf9] text-stone-900 font-sans flex flex-col selection:bg-stone-200">
@@ -102,21 +130,39 @@ export default function WorkshopPage() {
                <p className="text-stone-500 font-sans tracking-wide">| องค์กรคู่ค้าของเรา |</p>
             </div>
             
-            {/* Logos Grid Placeholder */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full px-4">
-                 <div className="aspect-[3/2] bg-white rounded-xl flex items-center justify-center border border-stone-200 shadow-sm p-4 hover:shadow-md transition-shadow">
-                     <span className="text-stone-400 font-medium text-sm">รอโลโก้ 1</span>
-                 </div>
-                 <div className="aspect-[3/2] bg-white rounded-xl flex items-center justify-center border border-stone-200 shadow-sm p-4 hover:shadow-md transition-shadow">
-                     <span className="text-stone-400 font-medium text-sm">รอโลโก้ 2</span>
-                 </div>
-                 <div className="aspect-[3/2] bg-white rounded-xl flex items-center justify-center border border-stone-200 shadow-sm p-4 hover:shadow-md transition-shadow">
-                     <span className="text-stone-400 font-medium text-sm">รอโลโก้ 3</span>
-                 </div>
-                 <div className="aspect-[3/2] bg-white rounded-xl flex items-center justify-center border border-stone-200 shadow-sm p-4 hover:shadow-md transition-shadow">
-                     <span className="text-stone-400 font-medium text-sm">รอโลโก้ 4</span>
-                 </div>
+            {/* Logos Grid */}
+            <div ref={orgGridRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 w-full px-4">
+                 {ORGANIZATIONS.map((org, index) => (
+                     <div
+                         key={org.src}
+                         className={`transition-all duration-700 ease-out ${orgVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                         style={{ transitionDelay: `${index * 120}ms` }}
+                     >
+                         <div
+                             title={org.name}
+                             className="org-card group relative aspect-[3/2] bg-white rounded-2xl flex items-center justify-center border border-stone-200/80 shadow-sm overflow-hidden p-5 md:p-6 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#3b3228]/10 hover:border-[#dce495]"
+                         >
+                             {/* Soft brand-tone glow on hover */}
+                             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#f7f9e8] via-transparent to-[#f3efe6] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                             {/* Shine sweep */}
+                             <div className="org-shine pointer-events-none absolute inset-y-0 -left-full w-1/2 bg-gradient-to-r from-transparent via-white/70 to-transparent skew-x-[-20deg] z-20" />
+                             <img
+                                 src={org.src}
+                                 alt={org.name}
+                                 loading="lazy"
+                                 className={`relative z-10 w-auto h-auto object-contain ${org.size} transition-transform duration-500 ease-out group-hover:scale-110`}
+                             />
+                         </div>
+                     </div>
+                 ))}
             </div>
+            <style jsx>{`
+              .org-card:hover .org-shine { animation: orgShine 0.9s ease-out; }
+              @keyframes orgShine {
+                from { left: -100%; }
+                to { left: 150%; }
+              }
+            `}</style>
          </div>
 
       </div>
