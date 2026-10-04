@@ -88,7 +88,7 @@ export default function CheckoutModal() {
     setError('');
 
     try {
-      const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwYKDOWDPj9gIlb1fFForobxgklT9yF5_CoNnwQO_RrTBiCnfrfS9Tg_wJabptKa_SALw/exec";
+      const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw9bKbPGrPUclnlIl-lD5XZnSMUEsjSW7Lefd5ywFXN8l9KlFlGdhq4DJ42H7VlqZb9Sg/exec";
 
       const itemsForPayload = items.map(item => ({
         color: { "white": "Natural", "light-green": "Pandan", "lime": "Turmeric", "charcoal": "Charcoal" }[item.color] || item.color,
@@ -100,6 +100,7 @@ export default function CheckoutModal() {
       }));
 
       const webhookPayload = {
+        type: 'order',
         userId: user.uid,
         userEmail: user.email,
         customerInfo: formData,
@@ -271,7 +272,7 @@ export default function CheckoutModal() {
                 <p className="text-xs text-stone-500 mb-3 font-medium tracking-wide uppercase">สแกน QR Code เพื่อโอนเงิน</p>
                 <div className="bg-white rounded-xl p-3 inline-block shadow-sm border border-stone-100">
                   <img
-                    src={`${basePath}/images/qr-payment-v3.png`}
+                    src={`${basePath}/images/qr-payment-v4.jpg`}
                     alt="QR Code สำหรับชำระเงิน"
                     className="w-48 h-auto mx-auto rounded-lg"
                   />

@@ -83,31 +83,31 @@ export default function WorkshopPage() {
          <div className="w-full mb-24">
              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[150px] md:auto-rows-[200px]">
                  {/* Row 1 */}
-                 <div className="col-span-2 row-span-2 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium">รอรูปภาพ 1 (ขนาดใหญ่)</span>
+                 <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w1.webp" alt="Workshop 1" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
-                 <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 2</span>
+                 <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w2.webp" alt="Workshop 2" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
-                 <div className="col-span-1 row-span-2 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 3 (แนวตั้ง)</span>
+                 <div className="col-span-1 row-span-2 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w3.webp" alt="Workshop 3" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
                  {/* Row 2 */}
-                 <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 4</span>
+                 <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w4.webp" alt="Workshop 4" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
                  {/* Row 3 */}
-                 <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 5</span>
+                 <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w5.webp" alt="Workshop 5" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
-                 <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 6</span>
+                 <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w6.webp" alt="Workshop 6" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
-                 <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 7</span>
+                 <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w7.webp" alt="Workshop 7" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
-                 <div className="col-span-1 row-span-1 bg-stone-200/60 rounded-2xl flex items-center justify-center border-2 border-dashed border-stone-300">
-                     <span className="text-stone-400 font-medium text-xs md:text-sm">รอรูปภาพ 8</span>
+                 <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                     <img src="/Web-Chomm-s-House/images/workshop/w8.webp" alt="Workshop 8" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
              </div>
          </div>

@@ -50,11 +50,11 @@ export default function ProductPage() {
   const [currentImages, setCurrentImages] = useState(getImagesForColor('white'));
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState('white');
-  const [selectedDecoration, setSelectedDecoration] = useState('ดอกไม้แห้ง');
-  const [selectedSize, setSelectedSize] = useState('30-35 กรัม');
+  const [selectedDecoration, setSelectedDecoration] = useState('ไม่ใส่ประดับ');
+  const [selectedSize, setSelectedSize] = useState('');
   const [selectedScent, setSelectedScent] = useState('Ice Mint');
-  const [selectedPackaging, setSelectedPackaging] = useState('กล่องลิ้นชัก');
-  const [addLogoSticker, setAddLogoSticker] = useState(true);
+  const [selectedPackaging, setSelectedPackaging] = useState('');
+  const [addLogoSticker, setAddLogoSticker] = useState(false);
 
   const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -80,9 +80,28 @@ export default function ProductPage() {
     { id: 'charcoal', hex: '#3F3F46', label: 'Charcoal' }
   ];
 
-  const decorations = ['ดอกไม้แห้ง', 'โป๊ยกั๊ก', 'Bio-Bead', 'หินภูเขาไฟ', 'ดอกโสน'];
+  const decorations = ['ไม่ใส่ประดับ', 'ดอกไม้แห้ง', 'โป๊ยกั๊ก', 'Bio-Bead', 'หินภูเขาไฟ', 'ดอกโสน'];
   const sizes = ['10-15 กรัม', '20-25 กรัม', '30-35 กรัม'];
   const scents = ['Premium Floral', 'Fresh Citrus', 'Ice Mint', 'Eucalyptus Bouquet', 'Coffee & Cream'];
+
+  const decorCosts: Record<string, number> = {
+    'ไม่ใส่ประดับ': 0,
+    'ดอกไม้แห้ง': 5,
+    'โป๊ยกั๊ก': 3,
+    'Bio-Bead': 3,
+    'หินภูเขาไฟ': 5,
+    'ดอกโสน': 5
+  };
+  const sizeCosts: Record<string, number> = {
+    '10-15 กรัม': 20,
+    '20-25 กรัม': 30,
+    '30-35 กรัม': 45
+  };
+  const pkgCosts: Record<string, number> = {
+    'ซองใส': 1,
+    'ซองแก้ว': 3,
+    'กล่องลิ้นชัก': 25
+  };
 
   const handleColorClick = (colorId: string) => {
     setSelectedColor(colorId);
@@ -90,7 +109,22 @@ export default function ProductPage() {
     setCurrentImages(getImagesForColor(colorId));
   };
 
+  const currentCost = 
+    (decorCosts[selectedDecoration] || 0) + 
+    (sizeCosts[selectedSize] || 0) + 
+    (pkgCosts[selectedPackaging] || 0) + 
+    (addLogoSticker ? 2 : 0);
+
+  const basePrice = (selectedSize && selectedPackaging) ? Math.round((currentCost + (currentCost * 0.7)) * 2) : 0;
+  const totalPrice = basePrice * qty;
+
+  const isFormComplete = selectedSize !== '' && selectedPackaging !== '';
+
   const handleAddToCart = () => {
+    if (!isFormComplete) {
+      alert('กรุณาเลือกขนาดและบรรจุภัณฑ์ก่อนสั่งซื้อ');
+      return;
+    }
     addToCart({
       color: selectedColor,
       size: selectedSize,
@@ -102,8 +136,6 @@ export default function ProductPage() {
       image: currentImages[0]
     });
   };
-  const basePrice = 190;
-  const totalPrice = basePrice * qty;
 
   return (
     <div className="min-h-screen bg-white text-stone-900 font-sans pb-24 lg:pb-16 selection:bg-stone-200">
@@ -222,7 +254,7 @@ export default function ProductPage() {
 
         <div className="w-full flex flex-col pt-2 lg:pt-4">
           <h1 className="text-3xl md:text-4xl font-serif text-stone-900 tracking-tight mb-2">Aroma Wax Sachet</h1>
-          <p className="text-2xl font-medium text-stone-800 mb-6">฿ 190</p>
+          <p className="text-2xl font-medium text-stone-800 mb-6">฿ {basePrice.toLocaleString()}</p>
           <p className="text-stone-500 text-sm leading-relaxed mb-8">
             แว็กซ์หอมปรับอากาศทำมือ ผสานดอกไม้แห้งธรรมชาติ สร้างบรรยากาศผ่อนคลายให้ทุกพื้นที่ของคุณอย่างลงตัว
           </p>
@@ -316,7 +348,10 @@ export default function ProductPage() {
                 ))}
               </div>
               
-              <label className="flex items-center space-x-3 mt-4 cursor-pointer group w-max">
+              <label 
+                className="flex items-center space-x-3 mt-4 cursor-pointer group w-max"
+                onClick={() => setAddLogoSticker(!addLogoSticker)}
+              >
                 <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${addLogoSticker ? 'bg-stone-900 border border-stone-900' : 'border border-stone-300 group-hover:border-stone-400'}`}>
                   {addLogoSticker && <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>}
                 </div>
@@ -333,9 +368,13 @@ export default function ProductPage() {
                 <button onClick={() => setQty(qty + 1)} className="flex-1 hover:bg-stone-50 text-stone-600 h-full flex items-center justify-center text-xl transition-colors">+</button>
               </div>
 
-              <button onClick={handleAddToCart} className="flex-1 bg-stone-900 hover:bg-stone-800 text-white font-medium py-4 px-8 rounded-full flex items-center justify-center space-x-3 transition-transform active:scale-[0.98] shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+              <button 
+                onClick={handleAddToCart} 
+                disabled={!isFormComplete}
+                className={`flex-1 font-medium py-4 px-8 rounded-full flex items-center justify-center space-x-3 transition-all ${isFormComplete ? 'bg-stone-900 hover:bg-stone-800 text-white active:scale-[0.98] shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : 'bg-stone-200 text-stone-500 cursor-not-allowed'}`}
+              >
                 <span className="text-lg">สั่งซื้อสินค้า</span>
-                <span className="w-1.5 h-1.5 bg-white/30 rounded-full"></span>
+                <span className="w-1.5 h-1.5 bg-current opacity-30 rounded-full"></span>
                 <span className="text-lg">฿ {totalPrice.toLocaleString()}</span>
               </button>
             </div>
@@ -355,7 +394,11 @@ export default function ProductPage() {
             <span className="w-8 text-center text-sm font-medium text-stone-900">{qty}</span>
             <button onClick={() => setQty(qty + 1)} className="flex-1 text-stone-600 h-full flex items-center justify-center text-lg active:bg-stone-200">+</button>
           </div>
-          <button onClick={handleAddToCart} className="bg-stone-900 text-white px-7 py-3.5 rounded-full font-medium shadow-lg active:scale-95 transition-transform text-sm">
+          <button 
+            onClick={handleAddToCart} 
+            disabled={!isFormComplete}
+            className={`px-7 py-3.5 rounded-full font-medium shadow-lg transition-all text-sm ${isFormComplete ? 'bg-stone-900 text-white active:scale-95' : 'bg-stone-200 text-stone-500 cursor-not-allowed'}`}
+          >
             สั่งซื้อ
           </button>
         </div>
