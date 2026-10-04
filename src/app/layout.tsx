@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Prompt, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import CartDrawer from "@/components/CartDrawer";
@@ -21,6 +21,9 @@ const playfairFont = Playfair_Display({
 export const metadata: Metadata = {
   title: "Chomm's House",
   description: "Handmade Aroma Wax Sachet & Premium Scents",
+  verification: {
+    google: "QdQlir1NlBVuEeWVcFx1frgvJmOvurPNBavqw7krOd8",
+  },
 };
 
 export default function RootLayout({
@@ -31,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="th"
-      className={`${promptFont.variable} ${playfairFont.variable} antialiased`}
+      className={`${promptFont.variable} ${playfairFont.variable} antialiased h-full`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-screen flex flex-col font-sans">
         <AuthProvider>
           {children}
           <CartDrawer />

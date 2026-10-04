@@ -138,7 +138,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-stone-900 font-sans pb-24 lg:pb-16 selection:bg-stone-200">
+    <div className="min-h-screen flex flex-col bg-white text-stone-900 font-sans selection:bg-stone-200">
       
       {isOrderSummaryOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/40 backdrop-blur-sm p-4">
