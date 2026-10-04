@@ -25,7 +25,7 @@ export default function HeaderActions() {
         <div className="hidden sm:flex items-center space-x-3 group relative">
           <div className="flex items-center space-x-2 cursor-pointer">
             <img src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}&background=random`} alt="User avatar" className="w-6 h-6 rounded-full" />
-            <span className="text-xs font-bold tracking-wider text-stone-700">{user.displayName?.split(' ')[0]}</span>
+            <span className="text-xs font-bold tracking-wider text-white/90">{user.displayName?.split(' ')[0]}</span>
           </div>
           
           {/* Dropdown for Logout */}
@@ -38,7 +38,7 @@ export default function HeaderActions() {
       ) : (
         <button 
           onClick={toggleLoginModal} 
-          className="hidden sm:flex items-center space-x-2 text-stone-500 hover:text-[#3b3228] transition-colors"
+          className="hidden sm:flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
           <span className="text-xs font-bold tracking-wider">LOGIN</span>
@@ -46,10 +46,10 @@ export default function HeaderActions() {
       )}
 
       {/* Cart Button */}
-      <div onClick={toggleCart} className="relative cursor-pointer text-stone-500 hover:text-[#3b3228] transition-colors p-2 -mr-2">
+      <div onClick={toggleCart} className="relative cursor-pointer text-white/80 hover:text-white transition-colors p-2 -mr-2">
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
         {cartItemCount > 0 && (
-          <span className="absolute top-1 right-1 bg-[#3b3228] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold border-2 border-white">
+          <span className="absolute top-1 right-1 bg-white text-[#3b3228] text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
             {cartItemCount}
           </span>
         )}

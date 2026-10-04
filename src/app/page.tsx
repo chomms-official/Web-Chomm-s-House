@@ -186,25 +186,25 @@ export default function ProductPage() {
         </div>
       )}
 
-      <nav className="sticky top-0 z-40 bg-[#FCFAF8]/95 backdrop-blur-2xl border-b border-[#3b3228]/10 border-t-[5px] border-t-[#3b3228] shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] px-5 md:px-10 py-5 md:py-6 flex items-center justify-between transition-all">
-        <button className="md:hidden p-2 -ml-2 text-stone-600" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+      <nav className="sticky top-0 z-40 bg-[#3b3228] shadow-lg shadow-black/10 px-5 md:px-10 py-5 md:py-6 flex items-center justify-between transition-all">
+        <button className="md:hidden p-2 -ml-2 text-white/90 hover:text-white transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
 
-        <div className="hidden md:flex space-x-10 text-[15px] text-stone-500 font-medium tracking-wide">
-          <a href="#" className="text-[#3b3228] font-bold transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#3b3228]">Shop</a>
-          <a href="/Web-Chomm-s-House/our-story" className="hover:text-[#3b3228] transition-colors">Our Story</a>
-          <a href="/Web-Chomm-s-House/workshop" className="hover:text-[#3b3228] transition-colors">Workshop</a>
-          <a href="/Web-Chomm-s-House/gallery" className="hover:text-[#3b3228] transition-colors">Gallery</a>
+        <div className="hidden md:flex space-x-10 text-[15px] text-white/70 font-medium tracking-wide">
+          <a href="#" className="text-white font-bold transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-white">Shop</a>
+          <a href="/Web-Chomm-s-House/our-story" className="hover:text-white transition-colors">Our Story</a>
+          <a href="/Web-Chomm-s-House/workshop" className="hover:text-white transition-colors">Workshop</a>
+          <a href="/Web-Chomm-s-House/gallery" className="hover:text-white transition-colors">Gallery</a>
         </div>
         
-        <div className="flex items-center space-x-2 font-serif font-medium text-2xl md:text-3xl tracking-tight text-[#3b3228] md:absolute md:left-1/2 md:-translate-x-1/2 cursor-pointer hover:scale-105 transition-transform duration-300" onClick={() => window.scrollTo(0,0)}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" className="w-6 h-6 md:w-7 md:h-7 text-[#3b3228]"><path d="M 10 10 Q 10 4 12 2 Q 14 4 14 10 Q 20 10 22 12 Q 20 14 14 14 Q 14 20 12 22 Q 10 20 10 14 Q 4 14 2 12 Q 4 10 10 10 Z" /></svg>
+        <div className="flex items-center space-x-2 font-serif font-medium text-2xl md:text-3xl tracking-tight text-white md:absolute md:left-1/2 md:-translate-x-1/2 cursor-pointer hover:scale-105 transition-transform duration-300" onClick={() => window.scrollTo(0,0)}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" className="w-6 h-6 md:w-7 md:h-7 text-white"><path d="M 10 10 Q 10 4 12 2 Q 14 4 14 10 Q 20 10 22 12 Q 20 14 14 14 Q 14 20 12 22 Q 10 20 10 14 Q 4 14 2 12 Q 4 10 10 10 Z" /></svg>
           <span className="ml-1">Chomm's House</span>
         </div>
 
-        <div className="flex items-center space-x-8 text-[15px] text-stone-500 font-medium">
-          <a href="/Web-Chomm-s-House/contact" className="hidden md:block hover:text-[#3b3228] transition-colors">Contact</a>
+        <div className="flex items-center space-x-8 text-[15px] text-white/70 font-medium">
+          <a href="/Web-Chomm-s-House/contact" className="hidden md:block hover:text-white transition-colors">Contact</a>
           <HeaderActions />
         </div>
       </nav>
