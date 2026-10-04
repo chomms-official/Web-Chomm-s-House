@@ -1,26 +1,21 @@
-import sys
+﻿import os
+import re
+import glob
 
-try:
-    for filepath in ['src/app/page.tsx', 'src/app/our-story/page.tsx']:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            text = f.read()
+pages = glob.glob(r'C:\Users\User\Documents\antigravity\web-chomms-house\src\app\**\page.tsx', recursive=True)
 
-        # Update desktop Workshop link
-        text = text.replace('<a href="#" className="hover:text-stone-900 transition-colors">Workshop</a>', '<a href="/Web-Chomm-s-House/workshop" className="hover:text-stone-900 transition-colors">Workshop</a>')
-        text = text.replace('<a href="#" className="hidden md:block hover:text-stone-900 transition-colors">Workshop</a>', '<a href="/Web-Chomm-s-House/workshop" className="hidden md:block hover:text-stone-900 transition-colors">Workshop</a>')
-        
-        # Update desktop Contact link
-        text = text.replace('<a href="#" className="hidden md:block hover:text-stone-900 transition-colors">Contact</a>', '<a href="/Web-Chomm-s-House/contact" className="hidden md:block hover:text-stone-900 transition-colors">Contact</a>')
-
-        # Update mobile Workshop link
-        text = text.replace('<a href="#" className="block text-stone-500">Workshop</a>', '<a href="/Web-Chomm-s-House/workshop" className="block text-stone-500">Workshop</a>')
-
-        # Update mobile Contact link
-        text = text.replace('<a href="#" className="block text-stone-500">Contact</a>', '<a href="/Web-Chomm-s-House/contact" className="block text-stone-500">Contact</a>')
-
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(text)
-            
-    print('Updated Navbars successfully.')
-except Exception as e:
-    print('Error:', e)
+for path in pages:
+    with open(path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # We want to replace the <nav className="..."> completely
+    # Pattern: <nav className="sticky top-0 z-40 [^"]+"
+    pattern = r'<nav className="sticky top-0 z-40 [^"]+"'
+    replacement = '<nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-2xl border-b border-stone-200/60 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.08)] px-5 md:px-10 py-4 flex items-center justify-between transition-all"'
+    
+    new_content = re.sub(pattern, replacement, content)
+    
+    if new_content != content:
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"Updated {path}")

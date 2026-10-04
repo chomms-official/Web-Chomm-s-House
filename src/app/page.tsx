@@ -186,7 +186,7 @@ export default function ProductPage() {
         </div>
       )}
 
-      <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-stone-100 px-5 md:px-10 py-4 flex items-center justify-between transition-all">
+      <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-2xl border-b border-stone-200/60 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.08)] px-5 md:px-10 py-4 flex items-center justify-between transition-all">
         <button className="md:hidden p-2 -ml-2 text-stone-600" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
@@ -233,6 +233,11 @@ export default function ProductPage() {
               className="w-full h-full object-cover object-center mix-blend-multiply transition-transform duration-700 ease-in-out group-hover:scale-[1.02]"
               
             />
+              <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 z-10 pointer-events-none">
+                <span className="text-[10px] md:text-xs text-stone-600 font-medium tracking-wide bg-white/40 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-sm">
+                  ภาพนี้เป็นเพียงภาพประกอบสินค้าเท่านั้น
+                </span>
+              </div>
           </div>
           
           <div className="grid grid-cols-6 gap-2 md:gap-3">
