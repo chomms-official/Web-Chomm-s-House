@@ -88,7 +88,7 @@ export default function WorkshopPage() {
                      <img src="/Web-Chomm-s-House/images/workshop/w1.webp" alt="Workshop 1" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                     <img src="/Web-Chomm-s-House/images/workshop/w2.webp" alt="Workshop 2" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                     <img src="/Web-Chomm-s-House/images/workshop/w2.webp" alt="Workshop 2" loading="lazy" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
                  </div>
                  <div className="col-span-1 row-span-2 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                      <img src="/Web-Chomm-s-House/images/workshop/w3.webp" alt="Workshop 3" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
@@ -102,13 +102,13 @@ export default function WorkshopPage() {
                      <img src="/Web-Chomm-s-House/images/workshop/w5.webp" alt="Workshop 5" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                     <img src="/Web-Chomm-s-House/images/workshop/w6.webp" alt="Workshop 6" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                     <img src="/Web-Chomm-s-House/images/workshop/w6.webp" alt="Workshop 6" loading="lazy" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
                  </div>
                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                      <img src="/Web-Chomm-s-House/images/workshop/w7.webp" alt="Workshop 7" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                  </div>
                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                     <img src="/Web-Chomm-s-House/images/workshop/w8.webp" alt="Workshop 8" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                     <img src="/Web-Chomm-s-House/images/workshop/w8.webp" alt="Workshop 8" loading="lazy" className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" />
                  </div>
              </div>
          </div>
