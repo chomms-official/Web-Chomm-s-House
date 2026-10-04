@@ -1,4 +1,5 @@
 'use client';
+import Footer from "@/components/Footer";
 import HeaderActions from '@/components/HeaderActions';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -24,46 +25,46 @@ const CATEGORIES: { id: Category; label: string }[] = [
 ];
 
 const GALLERY_ITEMS: GalleryItem[] = [
-  { id: 1, src: ${BASE}/images/gallery/g1.webp, alt: 'ภาพตัวอย่างสินค้า 1', category: 'gift', ratio: 'aspect-[4/3]' },
-  { id: 2, src: ${BASE}/images/gallery/g2.webp, alt: 'ภาพตัวอย่างสินค้า 2', category: 'accessory', ratio: 'aspect-[3/4]' },
-  { id: 3, src: ${BASE}/images/gallery/g3.webp, alt: 'ภาพตัวอย่างสินค้า 3', category: 'accessory', ratio: 'aspect-[4/5]' },
-  { id: 4, src: ${BASE}/images/gallery/g4.webp, alt: 'ภาพตัวอย่างสินค้า 4', category: 'gift', ratio: 'aspect-[3/4]' },
-  { id: 5, src: ${BASE}/images/gallery/g5.webp, alt: 'ภาพตัวอย่างสินค้า 5', category: 'accessory', ratio: 'aspect-square' },
-  { id: 6, src: ${BASE}/images/gallery/g6.webp, alt: 'ภาพตัวอย่างสินค้า 6', category: 'sachet', ratio: 'aspect-[3/4]' },
-  { id: 7, src: ${BASE}/images/gallery/g7.webp, alt: 'ภาพตัวอย่างสินค้า 7', category: 'gift', ratio: 'aspect-[4/3]' },
-  { id: 8, src: ${BASE}/images/gallery/g8.webp, alt: 'ภาพตัวอย่างสินค้า 8', category: 'sachet', ratio: 'aspect-[3/4]' },
-  { id: 9, src: ${BASE}/images/gallery/g9.webp, alt: 'ภาพตัวอย่างสินค้า 9', category: 'sachet', ratio: 'aspect-[4/3]' },
-  { id: 10, src: ${BASE}/images/gallery/g10.webp, alt: 'ภาพตัวอย่างสินค้า 10', category: 'sachet', ratio: 'aspect-[3/4]' },
-  { id: 11, src: ${BASE}/images/gallery/g11.webp, alt: 'ภาพตัวอย่างสินค้า 11', category: 'accessory', ratio: 'aspect-[4/3]' },
-  { id: 12, src: ${BASE}/images/gallery/g12.webp, alt: 'ภาพตัวอย่างสินค้า 12', category: 'accessory', ratio: 'aspect-[4/3]' },
-  { id: 13, src: ${BASE}/images/gallery/g13.webp, alt: 'ภาพตัวอย่างสินค้า 13', category: 'gift', ratio: 'aspect-square' },
-  { id: 14, src: ${BASE}/images/gallery/g14.webp, alt: 'ภาพตัวอย่างสินค้า 14', category: 'accessory', ratio: 'aspect-[4/5]' },
-  { id: 15, src: ${BASE}/images/gallery/g15.webp, alt: 'ภาพตัวอย่างสินค้า 15', category: 'sachet', ratio: 'aspect-[4/5]' },
-  { id: 16, src: ${BASE}/images/gallery/g16.webp, alt: 'ภาพตัวอย่างสินค้า 16', category: 'accessory', ratio: 'aspect-[3/4]' },
-  { id: 17, src: ${BASE}/images/gallery/g17.webp, alt: 'ภาพตัวอย่างสินค้า 17', category: 'accessory', ratio: 'aspect-[4/3]' },
-  { id: 18, src: ${BASE}/images/gallery/g18.webp, alt: 'ภาพตัวอย่างสินค้า 18', category: 'gift', ratio: 'aspect-[4/5]' },
-  { id: 19, src: ${BASE}/images/gallery/g19.webp, alt: 'ภาพตัวอย่างสินค้า 19', category: 'gift', ratio: 'aspect-[4/3]' },
-  { id: 20, src: ${BASE}/images/gallery/g20.webp, alt: 'ภาพตัวอย่างสินค้า 20', category: 'gift', ratio: 'aspect-[4/5]' },
-  { id: 21, src: ${BASE}/images/gallery/g21.webp, alt: 'ภาพตัวอย่างสินค้า 21', category: 'sachet', ratio: 'aspect-[4/3]' },
-  { id: 22, src: ${BASE}/images/gallery/g22.webp, alt: 'ภาพตัวอย่างสินค้า 22', category: 'gift', ratio: 'aspect-[4/3]' },
-  { id: 23, src: ${BASE}/images/gallery/g23.webp, alt: 'ภาพตัวอย่างสินค้า 23', category: 'gift', ratio: 'aspect-[3/4]' },
-  { id: 24, src: ${BASE}/images/gallery/g24.webp, alt: 'ภาพตัวอย่างสินค้า 24', category: 'sachet', ratio: 'aspect-[3/4]' },
-  { id: 25, src: ${BASE}/images/gallery/g25.webp, alt: 'ภาพตัวอย่างสินค้า 25', category: 'gift', ratio: 'aspect-[4/3]' },
-  { id: 26, src: ${BASE}/images/gallery/g26.webp, alt: 'ภาพตัวอย่างสินค้า 26', category: 'sachet', ratio: 'aspect-square' },
-  { id: 27, src: ${BASE}/images/gallery/g27.webp, alt: 'ภาพตัวอย่างสินค้า 27', category: 'accessory', ratio: 'aspect-[4/3]' },
-  { id: 28, src: ${BASE}/images/gallery/g28.webp, alt: 'ภาพตัวอย่างสินค้า 28', category: 'accessory', ratio: 'aspect-[4/3]' },
-  { id: 29, src: ${BASE}/images/gallery/g29.webp, alt: 'ภาพตัวอย่างสินค้า 29', category: 'sachet', ratio: 'aspect-[4/3]' },
-  { id: 30, src: ${BASE}/images/gallery/g30.webp, alt: 'ภาพตัวอย่างสินค้า 30', category: 'gift', ratio: 'aspect-square' },
-  { id: 31, src: ${BASE}/images/gallery/g31.webp, alt: 'ภาพตัวอย่างสินค้า 31', category: 'sachet', ratio: 'aspect-[3/4]' },
-  { id: 32, src: ${BASE}/images/gallery/g32.webp, alt: 'ภาพตัวอย่างสินค้า 32', category: 'sachet', ratio: 'aspect-square' },
-  { id: 33, src: ${BASE}/images/gallery/g33.webp, alt: 'ภาพตัวอย่างสินค้า 33', category: 'sachet', ratio: 'aspect-square' },
-  { id: 34, src: ${BASE}/images/gallery/g34.webp, alt: 'ภาพตัวอย่างสินค้า 34', category: 'sachet', ratio: 'aspect-[4/3]' },
-  { id: 35, src: ${BASE}/images/gallery/g35.webp, alt: 'ภาพตัวอย่างสินค้า 35', category: 'sachet', ratio: 'aspect-square' },
-  { id: 36, src: ${BASE}/images/gallery/g36.webp, alt: 'ภาพตัวอย่างสินค้า 36', category: 'accessory', ratio: 'aspect-square' },
-  { id: 37, src: ${BASE}/images/gallery/g37.webp, alt: 'ภาพตัวอย่างสินค้า 37', category: 'gift', ratio: 'aspect-[4/3]' },
-  { id: 38, src: ${BASE}/images/gallery/g38.webp, alt: 'ภาพตัวอย่างสินค้า 38', category: 'sachet', ratio: 'aspect-[4/5]' },
-  { id: 39, src: ${BASE}/images/gallery/g39.webp, alt: 'ภาพตัวอย่างสินค้า 39', category: 'accessory', ratio: 'aspect-[3/4]' },
-  { id: 40, src: ${BASE}/images/gallery/g40.webp, alt: 'ภาพตัวอย่างสินค้า 40', category: 'gift', ratio: 'aspect-[3/4]' },
+  { id: 1, src: `${BASE}/images/gallery/g1.webp`, alt: 'ภาพตัวอย่างสินค้า 1', category: 'gift', ratio: 'aspect-[4/3]' },
+  { id: 2, src: `${BASE}/images/gallery/g2.webp`, alt: 'ภาพตัวอย่างสินค้า 2', category: 'accessory', ratio: 'aspect-[3/4]' },
+  { id: 3, src: `${BASE}/images/gallery/g3.webp`, alt: 'ภาพตัวอย่างสินค้า 3', category: 'accessory', ratio: 'aspect-[4/5]' },
+  { id: 4, src: `${BASE}/images/gallery/g4.webp`, alt: 'ภาพตัวอย่างสินค้า 4', category: 'gift', ratio: 'aspect-[3/4]' },
+  { id: 5, src: `${BASE}/images/gallery/g5.webp`, alt: 'ภาพตัวอย่างสินค้า 5', category: 'accessory', ratio: 'aspect-square' },
+  { id: 6, src: `${BASE}/images/gallery/g6.webp`, alt: 'ภาพตัวอย่างสินค้า 6', category: 'sachet', ratio: 'aspect-[3/4]' },
+  { id: 7, src: `${BASE}/images/gallery/g7.webp`, alt: 'ภาพตัวอย่างสินค้า 7', category: 'gift', ratio: 'aspect-[4/3]' },
+  { id: 8, src: `${BASE}/images/gallery/g8.webp`, alt: 'ภาพตัวอย่างสินค้า 8', category: 'sachet', ratio: 'aspect-[3/4]' },
+  { id: 9, src: `${BASE}/images/gallery/g9.webp`, alt: 'ภาพตัวอย่างสินค้า 9', category: 'sachet', ratio: 'aspect-[4/3]' },
+  { id: 10, src: `${BASE}/images/gallery/g10.webp`, alt: 'ภาพตัวอย่างสินค้า 10', category: 'sachet', ratio: 'aspect-[3/4]' },
+  { id: 11, src: `${BASE}/images/gallery/g11.webp`, alt: 'ภาพตัวอย่างสินค้า 11', category: 'accessory', ratio: 'aspect-[4/3]' },
+  { id: 12, src: `${BASE}/images/gallery/g12.webp`, alt: 'ภาพตัวอย่างสินค้า 12', category: 'accessory', ratio: 'aspect-[4/3]' },
+  { id: 13, src: `${BASE}/images/gallery/g13.webp`, alt: 'ภาพตัวอย่างสินค้า 13', category: 'gift', ratio: 'aspect-square' },
+  { id: 14, src: `${BASE}/images/gallery/g14.webp`, alt: 'ภาพตัวอย่างสินค้า 14', category: 'accessory', ratio: 'aspect-[4/5]' },
+  { id: 15, src: `${BASE}/images/gallery/g15.webp`, alt: 'ภาพตัวอย่างสินค้า 15', category: 'sachet', ratio: 'aspect-[4/5]' },
+  { id: 16, src: `${BASE}/images/gallery/g16.webp`, alt: 'ภาพตัวอย่างสินค้า 16', category: 'accessory', ratio: 'aspect-[3/4]' },
+  { id: 17, src: `${BASE}/images/gallery/g17.webp`, alt: 'ภาพตัวอย่างสินค้า 17', category: 'accessory', ratio: 'aspect-[4/3]' },
+  { id: 18, src: `${BASE}/images/gallery/g18.webp`, alt: 'ภาพตัวอย่างสินค้า 18', category: 'gift', ratio: 'aspect-[4/5]' },
+  { id: 19, src: `${BASE}/images/gallery/g19.webp`, alt: 'ภาพตัวอย่างสินค้า 19', category: 'gift', ratio: 'aspect-[4/3]' },
+  { id: 20, src: `${BASE}/images/gallery/g20.webp`, alt: 'ภาพตัวอย่างสินค้า 20', category: 'gift', ratio: 'aspect-[4/5]' },
+  { id: 21, src: `${BASE}/images/gallery/g21.webp`, alt: 'ภาพตัวอย่างสินค้า 21', category: 'sachet', ratio: 'aspect-[4/3]' },
+  { id: 22, src: `${BASE}/images/gallery/g22.webp`, alt: 'ภาพตัวอย่างสินค้า 22', category: 'gift', ratio: 'aspect-[4/3]' },
+  { id: 23, src: `${BASE}/images/gallery/g23.webp`, alt: 'ภาพตัวอย่างสินค้า 23', category: 'gift', ratio: 'aspect-[3/4]' },
+  { id: 24, src: `${BASE}/images/gallery/g24.webp`, alt: 'ภาพตัวอย่างสินค้า 24', category: 'sachet', ratio: 'aspect-[3/4]' },
+  { id: 25, src: `${BASE}/images/gallery/g25.webp`, alt: 'ภาพตัวอย่างสินค้า 25', category: 'gift', ratio: 'aspect-[4/3]' },
+  { id: 26, src: `${BASE}/images/gallery/g26.webp`, alt: 'ภาพตัวอย่างสินค้า 26', category: 'sachet', ratio: 'aspect-square' },
+  { id: 27, src: `${BASE}/images/gallery/g27.webp`, alt: 'ภาพตัวอย่างสินค้า 27', category: 'accessory', ratio: 'aspect-[4/3]' },
+  { id: 28, src: `${BASE}/images/gallery/g28.webp`, alt: 'ภาพตัวอย่างสินค้า 28', category: 'accessory', ratio: 'aspect-[4/3]' },
+  { id: 29, src: `${BASE}/images/gallery/g29.webp`, alt: 'ภาพตัวอย่างสินค้า 29', category: 'sachet', ratio: 'aspect-[4/3]' },
+  { id: 30, src: `${BASE}/images/gallery/g30.webp`, alt: 'ภาพตัวอย่างสินค้า 30', category: 'gift', ratio: 'aspect-square' },
+  { id: 31, src: `${BASE}/images/gallery/g31.webp`, alt: 'ภาพตัวอย่างสินค้า 31', category: 'sachet', ratio: 'aspect-[3/4]' },
+  { id: 32, src: `${BASE}/images/gallery/g32.webp`, alt: 'ภาพตัวอย่างสินค้า 32', category: 'sachet', ratio: 'aspect-square' },
+  { id: 33, src: `${BASE}/images/gallery/g33.webp`, alt: 'ภาพตัวอย่างสินค้า 33', category: 'sachet', ratio: 'aspect-square' },
+  { id: 34, src: `${BASE}/images/gallery/g34.webp`, alt: 'ภาพตัวอย่างสินค้า 34', category: 'sachet', ratio: 'aspect-[4/3]' },
+  { id: 35, src: `${BASE}/images/gallery/g35.webp`, alt: 'ภาพตัวอย่างสินค้า 35', category: 'sachet', ratio: 'aspect-square' },
+  { id: 36, src: `${BASE}/images/gallery/g36.webp`, alt: 'ภาพตัวอย่างสินค้า 36', category: 'accessory', ratio: 'aspect-square' },
+  { id: 37, src: `${BASE}/images/gallery/g37.webp`, alt: 'ภาพตัวอย่างสินค้า 37', category: 'gift', ratio: 'aspect-[4/3]' },
+  { id: 38, src: `${BASE}/images/gallery/g38.webp`, alt: 'ภาพตัวอย่างสินค้า 38', category: 'sachet', ratio: 'aspect-[4/5]' },
+  { id: 39, src: `${BASE}/images/gallery/g39.webp`, alt: 'ภาพตัวอย่างสินค้า 39', category: 'accessory', ratio: 'aspect-[3/4]' },
+  { id: 40, src: `${BASE}/images/gallery/g40.webp`, alt: 'ภาพตัวอย่างสินค้า 40', category: 'gift', ratio: 'aspect-[3/4]' },
 ];
 
 const StarMark = ({ className = '' }: { className?: string }) => (
@@ -118,7 +119,7 @@ export default function GalleryPage() {
   const currentItem = lightboxIndex !== null ? viewableItems[lightboxIndex] : null;
 
   return (
-    <div className="min-h-screen bg-[#fafaf9] text-stone-900 font-sans flex flex-col selection:bg-stone-200">
+    <div className="min-h-screen bg-[#fafaf9] text-stone-900 font-sans flex flex-col flex-1 w-full selection:bg-stone-200">
 
       {/* Navbar */}
       <nav className="sticky top-0 z-40 bg-[#fafaf9]/90 backdrop-blur-xl border-b border-stone-200/50 px-5 md:px-10 py-4 flex items-center justify-between transition-all">
@@ -323,23 +324,7 @@ export default function GalleryPage() {
       )}
 
       {/* Footer */}
-      <footer className="w-full bg-[#3b3228] pt-16 pb-8 flex flex-col items-center justify-center mt-auto">
-        <div className="flex items-center space-x-3 mb-6 cursor-pointer">
-          <span className="font-serif italic text-4xl text-white tracking-wide">Chomm&apos;s House</span>
-        </div>
-
-        <p className="font-serif italic text-white/90 text-xl tracking-wide mb-12">Where the scent, Carry the Story</p>
-
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-12 text-sm text-white/80 font-medium mb-12">
-          <a href="#" className="hover:text-white transition-colors">นโยบายความเป็นส่วนตัว</a>
-          <a href="#" className="hover:text-white transition-colors">เงื่อนไขการบริการ</a>
-          <a href="#" className="hover:text-white transition-colors">คำถามที่พบบ่อย (FAQ)</a>
-        </div>
-
-        <div className="w-full max-w-4xl border-t border-white/10 pt-8 flex justify-center">
-          <p className="text-xs text-white/50 font-sans tracking-wide">© 2026 Chomm&apos;s House, All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
 
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }

@@ -7,7 +7,7 @@ export default function OurStoryPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-stone-900 font-sans selection:bg-stone-200">
+    <div className="min-h-screen flex flex-col flex-1 w-full bg-white text-stone-900 font-sans selection:bg-stone-200">
       
       {/* Navbar */}
       <nav className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-stone-100 px-5 md:px-10 py-4 flex items-center justify-between transition-all">

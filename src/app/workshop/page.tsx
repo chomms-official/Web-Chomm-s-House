@@ -1,4 +1,5 @@
 'use client';
+import Footer from "@/components/Footer";
 import HeaderActions from '@/components/HeaderActions';
 import { useEffect, useRef, useState } from 'react';
 
@@ -34,7 +35,7 @@ export default function WorkshopPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#fafaf9] text-stone-900 font-sans flex flex-col selection:bg-stone-200">
+    <div className="min-h-screen bg-[#fafaf9] text-stone-900 font-sans flex flex-col flex-1 w-full selection:bg-stone-200">
       
       {/* Navbar */}
       <nav className="sticky top-0 z-40 bg-[#fafaf9]/90 backdrop-blur-xl border-b border-stone-200/50 px-5 md:px-10 py-4 flex items-center justify-between transition-all">
@@ -168,23 +169,7 @@ export default function WorkshopPage() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full bg-[#3b3228] pt-16 pb-8 flex flex-col items-center justify-center mt-auto">
-         <div className="flex items-center space-x-3 mb-6 cursor-pointer">
-            <span className="font-serif italic text-4xl text-white tracking-wide">Chomm's House</span>
-         </div>
-         
-         <p className="font-serif italic text-white/90 text-xl tracking-wide mb-12">Where the scent, Carry the Story</p>
-
-         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-12 text-sm text-white/80 font-medium mb-12">
-            <a href="#" className="hover:text-white transition-colors">นโยบายความเป็นส่วนตัว</a>
-            <a href="#" className="hover:text-white transition-colors">เงื่อนไขการบริการ</a>
-            <a href="#" className="hover:text-white transition-colors">คำถามที่พบบ่อย (FAQ)</a>
-         </div>
-
-         <div className="w-full max-w-4xl border-t border-white/10 pt-8 flex justify-center">
-            <p className="text-xs text-white/50 font-sans tracking-wide">© 2026 Chomm's House, All rights reserved.</p>
-         </div>
-      </footer>
+      <Footer />
 
     </div>
   );
