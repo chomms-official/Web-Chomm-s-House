@@ -1,6 +1,7 @@
 'use client';
 import { useCartStore } from '@/store/cartStore';
 import HeaderActions from '@/components/HeaderActions';
+import Footer from "@/components/Footer";
 import { useState, useEffect } from 'react';
 
 export default function ProductPage() {
@@ -383,6 +384,8 @@ export default function ProductPage() {
         </div>
       </div>
       
+      <Footer />
+
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-stone-200 p-4 px-5 flex items-center justify-between z-40 pb-safe shadow-[0_-10px_40px_rgb(0,0,0,0.05)]">
         <div className="flex flex-col">
           <span className="text-xs text-stone-500 mb-0.5">ราคาสุทธิ</span>
