@@ -10,6 +10,26 @@ type CheckoutStep = 'form' | 'payment' | 'success';
 export default function CheckoutModal() {
   const { isCheckoutModalOpen, toggleCheckoutModal, items, user, clearCart, toggleLoginModal } = useCartStore();
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' });
+  const [addressData, setAddressData] = useState({
+    houseNumber: '', mooSoi: '', road: '', subdistrict: '', district: '', province: '', postalCode: ''
+  });
+
+  const updateAddress = (field: string, value: string) => {
+    const newAddr = { ...addressData, [field]: value };
+    setAddressData(newAddr);
+    
+    const parts = [
+      newAddr.houseNumber,
+      newAddr.mooSoi && newAddr.mooSoi !== '-' ? 'หมู่/ซอย ' + newAddr.mooSoi : '',
+      newAddr.road && newAddr.road !== '-' ? 'ถนน ' + newAddr.road : '',
+      newAddr.subdistrict && newAddr.subdistrict !== '-' ? 'ต./แขวง ' + newAddr.subdistrict : '',
+      newAddr.district && newAddr.district !== '-' ? 'อ./เขต ' + newAddr.district : '',
+      newAddr.province && newAddr.province !== '-' ? 'จ.' + newAddr.province : '',
+      newAddr.postalCode
+    ].filter(Boolean);
+    
+    setFormData({ ...formData, address: parts.join(' ') });
+  };
   const [step, setStep] = useState<CheckoutStep>('form');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -254,13 +274,24 @@ export default function CheckoutModal() {
               </div>
               <div>
                 <label className="block text-sm font-bold text-stone-900 mb-1.5">ที่อยู่จัดส่ง <span className="text-red-500">*</span></label>
-                <textarea
-                  required
-                  value={formData.address}
-                  onChange={e => setFormData({...formData, address: e.target.value})}
-                  className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all h-24 resize-none text-stone-900 text-sm placeholder:text-stone-400"
-                  placeholder="บ้านเลขที่, ซอย, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์"
-                ></textarea>
+                <p className="text-xs text-stone-500 mb-3">(หากไม่มีข้อมูลในส่วนใด กรุณาใส่เครื่องหมาย - แทน)</p>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <input required type="text" value={addressData.houseNumber} onChange={e => updateAddress('houseNumber', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="บ้านเลขที่ *" />
+                    <input required type="text" value={addressData.mooSoi} onChange={e => updateAddress('mooSoi', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="หมู่/ซอย (ไม่มีใส่ -)" />
+                  </div>
+                  <div>
+                    <input required type="text" value={addressData.road} onChange={e => updateAddress('road', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="ถนน (ไม่มีใส่ -)" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input required type="text" value={addressData.subdistrict} onChange={e => updateAddress('subdistrict', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="แขวง/ตำบล *" />
+                    <input required type="text" value={addressData.district} onChange={e => updateAddress('district', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="เขต/อำเภอ *" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input required type="text" value={addressData.province} onChange={e => updateAddress('province', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="จังหวัด *" />
+                    <input required type="text" value={addressData.postalCode} onChange={e => updateAddress('postalCode', e.target.value)} className="w-full border border-stone-300 rounded-xl px-4 py-3 outline-none focus:border-stone-900 focus:ring-2 focus:ring-stone-900/10 transition-all text-stone-900 text-sm placeholder:text-stone-400" placeholder="รหัสไปรษณีย์ *" />
+                  </div>
+                </div>
               </div>
               {error && <p className="text-red-500 text-sm">{error}</p>}
             </form>
