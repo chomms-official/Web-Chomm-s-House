@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://chomms-official.github.io/Web-Chomm-s-House/sitemap.xml
