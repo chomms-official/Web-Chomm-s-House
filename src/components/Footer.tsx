@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 
 export default function Footer() {
@@ -7,10 +7,10 @@ export default function Footer() {
   return (
     <>
       
-      <div className="w-full flex flex-col items-center justify-center px-4 py-16 bg-[#fafaf9] z-10 relative border-t border-stone-200">
+      <div id="contact" className="scroll-mt-[72px] lg:scroll-mt-[88px] w-full flex flex-col items-center justify-center px-4 py-16 bg-[#fafaf9] z-10 relative border-t border-stone-200">
         
          
-         <h1 className="text-3xl md:text-4xl font-sans font-bold text-stone-800 mb-12">ช่องทางการติดต่อ</h1>
+         <h2 className="text-3xl md:text-4xl font-sans font-bold text-stone-800 mb-12">ช่องทางการติดต่อ</h2>
 
          {/* Primary Contacts */}
          <div className="flex flex-col md:flex-row gap-4 mb-16 w-full max-w-3xl justify-center">

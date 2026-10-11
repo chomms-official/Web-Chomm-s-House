@@ -2,13 +2,60 @@
 
 import { useCartStore } from '../store/cartStore';
 import { auth, googleProvider } from '../lib/firebase';
-import { signInWithPopup } from 'firebase/auth';
-import { useState } from 'react';
+import { signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+
+/** ตรวจจับเบราว์เซอร์ในแอป (LINE / Facebook / Instagram / TikTok ฯลฯ) ซึ่ง Google ไม่อนุญาตให้ล็อกอิน */
+const detectInAppBrowser = (): 'line' | 'other' | null => {
+  if (typeof navigator === 'undefined') return null;
+  const ua = navigator.userAgent || '';
+  if (/\bLine\//i.test(ua)) return 'line';
+  if (/FBAN|FBAV|FB_IAB|Instagram|Messenger|musical_ly|BytedanceWebview|TikTok|Twitter|Snapchat|KAKAOTALK/i.test(ua)) return 'other';
+  return null;
+};
+
+/** แปลงข้อผิดพลาดจาก Firebase เป็นข้อความภาษาไทยที่ผู้ใช้เข้าใจได้ */
+const getErrorMessage = (code: string): string => {
+  switch (code) {
+    case 'auth/network-request-failed':
+      return 'ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้ กรุณาตรวจสอบการเชื่อมต่อแล้วลองใหม่อีกครั้ง';
+    case 'auth/too-many-requests':
+      return 'มีการพยายามเข้าสู่ระบบหลายครั้งเกินไป กรุณารอสักครู่แล้วลองใหม่';
+    case 'auth/unauthorized-domain':
+      return 'โดเมนนี้ยังไม่ได้รับอนุญาตให้เข้าสู่ระบบ กรุณาติดต่อผู้ดูแลเว็บไซต์';
+    case 'auth/operation-not-supported-in-this-environment':
+    case 'auth/web-storage-unsupported':
+      return 'เบราว์เซอร์นี้ไม่รองรับการเข้าสู่ระบบ กรุณาเปิดเว็บไซต์ด้วย Chrome หรือ Safari';
+    case 'auth/user-disabled':
+      return 'บัญชีนี้ถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลเว็บไซต์';
+    default:
+      return 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง';
+  }
+};
 
 export default function LoginModal() {
-  const { isLoginModalOpen, toggleLoginModal } = useCartStore();
+  const isLoginModalOpen = useCartStore((s) => s.isLoginModalOpen);
+  const closeLoginModal = useCartStore((s) => s.closeLoginModal);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [inApp, setInApp] = useState<'line' | 'other' | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setInApp(detectInAppBrowser());
+  }, []);
+
+  // ล้างข้อความแจ้งเตือนทุกครั้งที่เปิดหน้าต่างใหม่ + ปิดด้วยปุ่ม Esc
+  useEffect(() => {
+    if (!isLoginModalOpen) return;
+    setError('');
+    setCopied(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLoginModal();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isLoginModalOpen, closeLoginModal]);
 
   if (!isLoginModalOpen) return null;
 
@@ -17,21 +64,59 @@ export default function LoginModal() {
     setError('');
     try {
       await signInWithPopup(auth, googleProvider);
-      // User state is handled globally, so just close modal
-      toggleLoginModal();
+      // User state is handled globally (AuthProvider), so just close modal
+      closeLoginModal();
     } catch (err: any) {
-      console.error(err);
-      setError(err.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
+      const code: string = err?.code || '';
+      if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
+        // ผู้ใช้ปิดหน้าต่างเอง ไม่ใช่ข้อผิดพลาด
+      } else if (code === 'auth/popup-blocked') {
+        // เบราว์เซอร์บล็อกป๊อปอัป -> ใช้การ redirect แทน
+        try {
+          await signInWithRedirect(auth, googleProvider);
+          return;
+        } catch (redirectErr: any) {
+          console.error(redirectErr);
+          setError(getErrorMessage(redirectErr?.code || ''));
+        }
+      } else {
+        console.error(err);
+        setError(getErrorMessage(code));
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
+  const openInExternalBrowser = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('openExternalBrowser', '1');
+    window.location.href = url.toString();
+  };
+
+  const copyLink = async () => {
+    const url = window.location.href.split('?')[0];
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+    } catch {
+      window.prompt('คัดลอกลิงก์นี้ไปเปิดใน Chrome หรือ Safari', url);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col items-center p-8 text-center relative">
+    <div
+      className="fixed inset-0 z-[130] flex items-center justify-center bg-stone-900/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+      onClick={closeLoginModal}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="bg-white rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col items-center p-8 text-center relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         
-        <button onClick={toggleLoginModal} className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-900 transition-colors bg-stone-100 hover:bg-stone-200 rounded-full">
+        <button onClick={closeLoginModal} aria-label="ปิด" className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-900 transition-colors bg-stone-100 hover:bg-stone-200 rounded-full">
            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
@@ -42,7 +127,25 @@ export default function LoginModal() {
         <h3 className="text-2xl font-serif italic font-medium text-stone-900 mb-2">Welcome Back</h3>
         <p className="text-sm text-stone-500 mb-8 font-sans tracking-wide">เข้าสู่ระบบเพื่อบันทึกตะกร้าสินค้าของคุณข้ามอุปกรณ์</p>
 
-        {error && <p className="text-xs text-red-500 mb-4">{error}</p>}
+        {inApp && (
+          <div className="w-full text-left bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-5">
+            <p className="text-sm font-bold text-amber-800 mb-1">กรุณาเปิดด้วย Chrome หรือ Safari</p>
+            <p className="text-xs text-amber-700 leading-relaxed mb-3">
+              Google ไม่อนุญาตให้เข้าสู่ระบบผ่านเบราว์เซอร์ในแอป (เช่น LINE, Facebook, Instagram) กรุณาเปิดเว็บไซต์ในเบราว์เซอร์ของเครื่องก่อนเข้าสู่ระบบ
+            </p>
+            {inApp === 'line' ? (
+              <button onClick={openInExternalBrowser} className="w-full bg-[#06C755] hover:bg-[#05b14c] text-white text-sm font-bold py-2.5 rounded-full transition-colors">
+                เปิดในเบราว์เซอร์
+              </button>
+            ) : (
+              <button onClick={copyLink} className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm font-bold py-2.5 rounded-full transition-colors">
+                {copied ? 'คัดลอกลิงก์แล้ว ✓' : 'คัดลอกลิงก์เว็บไซต์'}
+              </button>
+            )}
+          </div>
+        )}
+
+        {error && <p className="text-xs text-red-500 mb-4 leading-relaxed">{error}</p>}
 
         <button 
           onClick={handleLogin}

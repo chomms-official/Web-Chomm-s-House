@@ -115,6 +115,8 @@ export default function CheckoutModal() {
         size: item.size,
         scent: item.scent,
         package: item.packaging,
+        decoration: item.decoration || 'ไม่ใส่ประดับ',
+        addon: item.addon || false,
         quantity: item.quantity,
         price: item.price,
       }));
@@ -245,7 +247,7 @@ export default function CheckoutModal() {
           {!user ? (
             <div className="text-center py-10">
               <p className="text-stone-500 mb-4">กรุณาเข้าสู่ระบบก่อนทำการสั่งซื้อ</p>
-              <button onClick={() => { toggleCheckoutModal(); toggleLoginModal(); }} className="bg-stone-900 text-white px-6 py-2 rounded-full">เข้าสู่ระบบ</button>
+              <button onClick={() => useCartStore.getState().openLoginModal()} className="bg-stone-900 text-white px-6 py-2 rounded-full hover:bg-stone-800 transition-colors">เข้าสู่ระบบ</button>
             </div>
           ) : step === 'form' ? (
             // ── Step 1: Shipping Form ──
