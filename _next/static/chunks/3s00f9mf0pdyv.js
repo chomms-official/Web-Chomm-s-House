@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,85149,o=>{"use strict";o.s(["BASE",0,"/Web-Chomm-s-House","SECTIONS",0,[{id:"our-story",label:"Our Story"},{id:"gallery",label:"Gallery"},{id:"shop",label:"Shop"},{id:"workshop",label:"Workshop"},{id:"contact",label:"Contact"}]])}]);
