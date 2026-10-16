@@ -99,14 +99,11 @@ export default function Footer() {
          </div>
       </div>
       <footer className="w-full bg-[#3b3228] pt-16 pb-28 lg:pb-8 flex flex-col items-center justify-center mt-auto z-10 relative">
-        <div className="flex items-center space-x-4 mb-6 cursor-pointer">
-          <img
-            src="/Web-Chomm-s-House/images/logo-120.png"
-            alt="Chomm's House Logo"
-            className="w-14 h-14 rounded-full object-cover ring-2 ring-white/20"
-            width={56}
-            height={56}
-          />
+        <div className="flex items-center space-x-3 mb-6 cursor-pointer">
+          <svg viewBox="0 0 100 100" fill="white" className="w-8 h-8">
+            <path d="M50 4 C58 4 64 14 64 26 C64 34 58 40 50 42 C58 44 64 50 64 58 C64 72 58 82 50 82 C42 82 36 72 36 58 C36 50 42 44 50 42 C42 40 36 34 36 26 C36 14 42 4 50 4Z M4 50 C4 42 14 36 26 36 C34 36 40 42 42 50 C44 42 50 36 58 36 C72 36 82 42 82 50 C82 58 72 64 58 64 C50 64 44 58 42 50 C40 58 34 64 26 64 C14 64 4 58 4 50Z" fillRule="evenodd"/>
+            <path d="M50 0 C60 0 68 12 68 26 C68 36 60 43 50 46 C60 49 68 56 68 66 C68 80 60 92 50 92 C40 92 32 80 32 66 C32 56 40 49 50 46 C40 43 32 36 32 26 C32 12 40 0 50 0Z M0 50 C0 40 12 32 26 32 C36 32 43 40 46 50 C49 40 56 32 66 32 C80 32 92 40 92 50 C92 60 80 68 66 68 C56 68 49 60 46 50 C43 60 36 68 26 68 C12 68 0 60 0 50Z" fill="none" stroke="white" strokeWidth="3" fillRule="evenodd"/>
+          </svg>
           <span className="font-serif italic text-4xl text-white tracking-wide">Chomm&apos;s House</span>
         </div>
 
