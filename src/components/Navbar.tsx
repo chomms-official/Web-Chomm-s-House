@@ -6,9 +6,13 @@ import { useCartStore } from '../store/cartStore';
 import { BASE, SECTIONS, type SectionId } from '../lib/constants';
 
 const Logo = ({ className = '' }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" className={className}>
-    <path d="M 10 10 Q 10 4 12 2 Q 14 4 14 10 Q 20 10 22 12 Q 20 14 14 14 Q 14 20 12 22 Q 10 20 10 14 Q 4 14 2 12 Q 4 10 10 10 Z" />
-  </svg>
+  <img
+    src={`${BASE}/images/logo-120.png`}
+    alt="Chomm's House"
+    className={`rounded-full object-cover ${className}`}
+    width={28}
+    height={28}
+  />
 );
 
 /** เลื่อนไปยังส่วนที่เลือกแบบนุ่มนวล (ระยะเผื่อแถบเมนูกำหนดด้วย scroll-margin-top ของแต่ละ section) */

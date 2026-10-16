@@ -21,9 +21,13 @@ export default function OurStorySection() {
             <br />
             <span className="flex items-center justify-center space-x-3 md:space-x-4 mt-4 text-4xl md:text-6xl font-serif italic font-medium">
               <span>H</span>
-              <svg className="w-10 h-10 md:w-16 md:h-16 text-[#dce495]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round">
-                 <path d="M 10 10 Q 10 4 12 2 Q 14 4 14 10 Q 20 10 22 12 Q 20 14 14 14 Q 14 20 12 22 Q 10 20 10 14 Q 4 14 2 12 Q 4 10 10 10 Z" />
-              </svg>
+              <img
+                src={`${BASE}/images/logo-120.png`}
+                alt="Chomm's House Logo"
+                className="w-10 h-10 md:w-16 md:h-16 rounded-full object-cover ring-2 ring-white/40"
+                width={64}
+                height={64}
+              />
               <span>USE</span>
             </span>
           </h1>

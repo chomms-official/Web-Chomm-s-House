@@ -99,7 +99,14 @@ export default function Footer() {
          </div>
       </div>
       <footer className="w-full bg-[#3b3228] pt-16 pb-28 lg:pb-8 flex flex-col items-center justify-center mt-auto z-10 relative">
-        <div className="flex items-center space-x-3 mb-6 cursor-pointer">
+        <div className="flex items-center space-x-4 mb-6 cursor-pointer">
+          <img
+            src="/Web-Chomm-s-House/images/logo-120.png"
+            alt="Chomm's House Logo"
+            className="w-14 h-14 rounded-full object-cover ring-2 ring-white/20"
+            width={56}
+            height={56}
+          />
           <span className="font-serif italic text-4xl text-white tracking-wide">Chomm&apos;s House</span>
         </div>
 
