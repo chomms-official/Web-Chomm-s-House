@@ -6,9 +6,16 @@ import { useCartStore } from '../store/cartStore';
 import { BASE, SECTIONS, type SectionId } from '../lib/constants';
 
 const Logo = ({ className = '' }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" fill="currentColor" className={className}>
-    <path d="M50 4 C58 4 64 14 64 26 C64 34 58 40 50 42 C58 44 64 50 64 58 C64 72 58 82 50 82 C42 82 36 72 36 58 C36 50 42 44 50 42 C42 40 36 34 36 26 C36 14 42 4 50 4Z M4 50 C4 42 14 36 26 36 C34 36 40 42 42 50 C44 42 50 36 58 36 C72 36 82 42 82 50 C82 58 72 64 58 64 C50 64 44 58 42 50 C40 58 34 64 26 64 C14 64 4 58 4 50Z" fillRule="evenodd"/>
-    <path d="M50 0 C60 0 68 12 68 26 C68 36 60 43 50 46 C60 49 68 56 68 66 C68 80 60 92 50 92 C40 92 32 80 32 66 C32 56 40 49 50 46 C40 43 32 36 32 26 C32 12 40 0 50 0Z M0 50 C0 40 12 32 26 32 C36 32 43 40 46 50 C49 40 56 32 66 32 C80 32 92 40 92 50 C92 60 80 68 66 68 C56 68 49 60 46 50 C43 60 36 68 26 68 C12 68 0 60 0 50Z" fill="none" stroke="currentColor" strokeWidth="3" fillRule="evenodd"/>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M 12 2.90 C 14.05 5.16 16.47 6.26 14.57 9.43 C 17.74 7.53 18.84 9.95 21.10 12.00 C 18.84 14.05 17.74 16.47 14.57 14.57 C 16.47 17.74 14.05 18.84 12.00 21.10 C 9.95 18.84 7.53 17.74 9.43 14.57 C 6.26 16.47 5.16 14.05 2.90 12.00 C 5.16 9.95 6.26 7.53 9.43 9.43 C 7.53 6.26 9.95 5.16 12.00 2.90 Z" />
   </svg>
 );
 
