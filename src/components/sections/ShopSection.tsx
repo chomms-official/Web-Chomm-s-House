@@ -48,7 +48,7 @@ const colors = [
 ];
 
 const decorations = ['ไม่ใส่ประดับ', 'ดอกไม้แห้ง', 'โป๊ยกั๊ก', 'Bio-Bead', 'หินภูเขาไฟ', 'ดอกโสน'];
-const sizes = ['10-15 กรัม', '20-25 กรัม', '30-35 กรัม'];
+const sizes = ['ขนาดเล็ก', 'ขนาดกลาง', 'ขนาดใหญ่'];
 const scents = ['Premium Floral', 'Fresh Citrus', 'Ice Mint', 'Eucalyptus Bouquet', 'Coffee & Cream'];
 const packagings = ['ซองใส', 'ซองแก้ว', 'กล่องลิ้นชัก'];
 
@@ -61,6 +61,9 @@ const decorCosts: Record<string, number> = {
   'ดอกโสน': 5
 };
 const sizeCosts: Record<string, number> = {
+  'ขนาดเล็ก': 20,
+  'ขนาดกลาง': 30,
+  'ขนาดใหญ่': 45,
   '10-15 กรัม': 20,
   '20-25 กรัม': 30,
   '30-35 กรัม': 45
@@ -268,18 +271,21 @@ export default function ShopSection() {
 
             <div>
               <span className="text-sm font-bold text-stone-900 tracking-wide block mb-3">ขนาด (Size)</span>
-              <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <div className="flex flex-wrap gap-2">
                 {sizes.map(size => (
                   <button 
                     key={size}
                     onClick={() => setSelectedSize(size)}
                     aria-pressed={selectedSize === size}
-                    className={`py-3 rounded-xl text-sm font-medium transition-all ${selectedSize === size ? 'border-2 border-stone-900 text-stone-900 bg-stone-50' : 'border border-stone-200 text-stone-500 hover:border-stone-400'}`}
+                    className={`px-5 sm:px-6 py-2.5 rounded-full text-sm font-medium transition-all ${selectedSize === size ? 'bg-stone-900 text-white shadow-md' : 'bg-white border border-stone-200 text-stone-600 hover:border-stone-400'}`}
                   >
                     {size}
                   </button>
                 ))}
               </div>
+              <p className="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                <span className="font-semibold text-stone-800">**หมายเหตุ:</span> สามารถสอบถามรายละเอียดขนาด/แม่พิมพ์ได้ที่ LINE OA
+              </p>
             </div>
 
             <div>
