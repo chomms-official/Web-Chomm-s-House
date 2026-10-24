@@ -1,16 +1,17 @@
 import { BASE } from '@/lib/constants';
+import HeroShopButton from '@/components/HeroShopButton';
 
 export default function OurStorySection() {
   return (
     <section id="our-story" className="scroll-mt-[72px] lg:scroll-mt-[88px] w-full bg-white">
 
       {/* 1. Hero Banner */}
-      <div className="relative w-full h-[400px] md:h-[500px] bg-[#ece9e4] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[430px] md:h-[520px] bg-[#ece9e4] flex items-center justify-center overflow-hidden">
         <img src={`${BASE}/images/hero-sachets.png`} className="absolute inset-0 w-full h-full object-cover" alt="Chomm's House ถุงหอมแว็กซ์ทำมือ" />
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/20 to-black/35"></div>
         
-        <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-4">
-          <div className="flex items-center space-x-4">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
+          <div className="flex items-center space-x-4 mb-4">
             <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
             <p className="text-white font-sans tracking-[0.3em] text-sm md:text-base font-medium">โอมเฮาส์</p>
             <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
@@ -36,9 +37,13 @@ export default function OurStorySection() {
             </span>
           </h1>
           
-          <p className="mt-8 text-white italic font-serif text-lg md:text-xl font-light tracking-wide pt-4">
+          <p className="mt-6 md:mt-7 text-white italic font-serif text-lg md:text-xl font-light tracking-wide drop-shadow-sm">
             Where the scent, Carry the Story
           </p>
+
+          <div className="mt-6 md:mt-7">
+            <HeroShopButton />
+          </div>
         </div>
       </div>
 
@@ -202,7 +207,7 @@ export default function OurStorySection() {
 
           <div className="w-full md:w-1/2 flex items-center justify-center mt-10 md:mt-0">
             <div className="w-[80%] md:w-[70%] flex items-center justify-center relative">
-               <img src={`${BASE}/images/big-lime-tag.png`} loading="lazy" className="w-full h-auto object-contain mix-blend-multiply" alt="Aroma Wax Sachet สีขมิ้น" />
+               <img src={`${BASE}/images/big-lime-tag.png`} width={740} height={1024} loading="lazy" className="w-full h-auto object-contain mix-blend-multiply" alt="Aroma Wax Sachet สีขมิ้น" />
             </div>
           </div>
 
